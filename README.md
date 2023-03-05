@@ -1,8 +1,9 @@
 # PROJECT MANAJEMENT SYSTEM NextJS
 
 ### Get Started
+npm install
+npm run dev
 
-### Pages
 
 ## Files and Folder
 

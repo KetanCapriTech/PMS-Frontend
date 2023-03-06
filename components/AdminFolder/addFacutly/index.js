@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 
-function AddStudentForm() {
+function AddFacultyForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
-  const [enrollmentNumber, setEnrollmentNumber] = useState("");
-  const bearerToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDAwOTQ1ZjcwOGU1MGZhOWVmMGMwNTgiLCJlbWFpbCI6Imtra2Z1bmRlMjJAZ21haWwuY29tIiwiaWF0IjoxNjc3Nzc3MzMwLCJleHAiOjE2NzkwNzMzMzB9.uBF1WMSXmmDlYVkDSB4Kd6N-e3nyCWRg9bOtkTzJQVw";
-
+  const bearerToken = localStorage.getItem("token");
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/add-student",
+        "http://localhost:5000/api/users/add-faculty",
         {
           method: "POST",
           body: JSON.stringify({
             name: name,
             email: email,
             department: department,
-            enrollment_number: enrollmentNumber,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -37,8 +33,8 @@ function AddStudentForm() {
 
   return (
     <div className="flex flex-col space-y-4 p-8">
-      <div className="flex flex-col ">
-        <label htmlFor="name" className="mb-1 font-medium text-gray-700 p-2">
+      <div className="flex flex-col">
+        <label htmlFor="name" className="mb-1 font-medium text-gray-700">
           Name
         </label>
         <input
@@ -76,25 +72,9 @@ function AddStudentForm() {
         />
       </div>
       <br></br>
-      <div className="flex flex-col">
-        <label
-          htmlFor="enrollmentNumber"
-          className="mb-1 font-medium text-gray-700"
-        >
-          Enrollment Number
-        </label>
-        <input
-          type="text"
-          id="enrollmentNumber"
-          value={enrollmentNumber}
-          onChange={(event) => setEnrollmentNumber(event.target.value)}
-          className="px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-        />
-      </div>
-      <br></br>
       <button
         onClick={handleSubmit}
-        className="bg-indigo-500 w-full lg:w-8 mt-4 mb-4  pt-4 pb-4 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        className="bg-indigo-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         Add Student
       </button>
@@ -102,4 +82,4 @@ function AddStudentForm() {
   );
 }
 
-export default AddStudentForm;
+export default AddFacultyForm;

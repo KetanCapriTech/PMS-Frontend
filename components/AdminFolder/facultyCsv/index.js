@@ -3,8 +3,7 @@ import React, { useState } from "react";
 function FacultyCsv() {
   const [csvData, setCsvData] = useState([]);
   const [responseData, setResponseData] = useState([]);
-  const bearerToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDAwOTQ1ZjcwOGU1MGZhOWVmMGMwNTgiLCJlbWFpbCI6Imtra2Z1bmRlMjJAZ21haWwuY29tIiwiaWF0IjoxNjc3Nzc3MzMwLCJleHAiOjE2NzkwNzMzMzB9.uBF1WMSXmmDlYVkDSB4Kd6N-e3nyCWRg9bOtkTzJQVw";
+  const bearerToken = localStorage.getItem("token");
 
   const handleOnDrop = async (event) => {
     const file = event.target.files[0];

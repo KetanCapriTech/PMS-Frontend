@@ -1,6 +1,6 @@
 import React from "react";
-import Admin from "layouts/Admin.js";
-import CardAddStudent from "components/Cards/CardAddStudent";
+import Admin from "layouts/DashboardView.js";
+import CardAddStudent from "components/Cards/CardAdmin/CardAddStudent";
 
 export default function FacultyTab() {
   return (

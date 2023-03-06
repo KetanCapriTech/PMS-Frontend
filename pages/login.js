@@ -12,7 +12,7 @@ const Login = () => {
     } else if (role === "student") {
       router.push("/student/dashboard");
     } else {
-      router.push("/faculty/dashboard");
+      router.push("/faculty/dashboard/allocatedProject");
     }
   };
 

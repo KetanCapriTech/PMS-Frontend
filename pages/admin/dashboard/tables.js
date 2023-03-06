@@ -6,7 +6,7 @@ import CardTable from "components/Cards/CardTable.js";
 
 // layout for page
 
-import Admin from "layouts/Admin.js";
+import Admin from "layouts/DashboardView.js";
 import CardBarChart from "components/Cards/CardBarChart";
 import CardStats from "components/Cards/CardStats";
 

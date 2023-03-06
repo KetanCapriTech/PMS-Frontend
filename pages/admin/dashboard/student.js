@@ -1,6 +1,6 @@
 import React from "react";
-import CardStudent from "components/Cards/CardStudent";
-import Admin from "layouts/Admin.js";
+import CardStudent from "components/Cards/CardAdmin/CardStudent";
+import Admin from "layouts/DashboardView.js";
 
 export default function Student() {
   return (

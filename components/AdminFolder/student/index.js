@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 
 const StudentTab = () => {
@@ -8,12 +9,12 @@ const StudentTab = () => {
   const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
   const [enrollmentNumber, setEnrollmentNumber] = useState("");
-  const bearerToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDAwOTQ1ZjcwOGU1MGZhOWVmMGMwNTgiLCJlbWFpbCI6Imtra2Z1bmRlMjJAZ21haWwuY29tIiwiaWF0IjoxNjc3Nzc3MzMwLCJleHAiOjE2NzkwNzMzMzB9.uBF1WMSXmmDlYVkDSB4Kd6N-e3nyCWRg9bOtkTzJQVw";
 
+  const bearerToken = localStorage.getItem("token");
+  console.log(bearerToken);
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/students", {
+      const response = await fetch(`http://localhost:5000/api/users/students`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +33,7 @@ const StudentTab = () => {
 
   useEffect(() => {
     handleSubmit();
-  }, []);
+  }, [handleSubmit]);
 
   const handleUpdate = async (
     id,

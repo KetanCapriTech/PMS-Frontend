@@ -33,7 +33,7 @@ const StudentTab = () => {
 
   useEffect(() => {
     handleSubmit();
-  }, [handleSubmit]);
+  }, []);
 
   const handleUpdate = async (
     id,

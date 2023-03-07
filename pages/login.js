@@ -10,7 +10,7 @@ const Login = () => {
     if (role === "admin") {
       router.push("/admin/dashboard/student");
     } else if (role === "student") {
-      router.push("/student/dashboard");
+      router.push("/student/dashboard/dashboard");
     } else {
       router.push("/faculty/dashboard/allocatedProject");
     }
@@ -35,6 +35,7 @@ const Login = () => {
         localStorage.setItem(data.message, data.token);
         localStorage.setItem("role", data.role);
         roleBasedLogin(data.role);
+        localStorage.setItem("email", data.email);
         localStorage.setItem("hhjklmno-hjsohjso-toKeN", "login success");
       } else {
         alert("incorrect id password ");

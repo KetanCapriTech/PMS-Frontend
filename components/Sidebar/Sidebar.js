@@ -66,10 +66,10 @@ export default function Sidebar() {
                     </a>
                   </Link>
                 </div>
-                <div className="w-6/12 flex justify-end">
+                <div className="w-6/12 flex justify-end  ">
                   <button
                     type="button"
-                    className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+                    className="cursor-pointer bg-black text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
                     onClick={() => setCollapseShow("hidden")}
                   >
                     <i className="fas fa-times"></i>
@@ -367,6 +367,147 @@ export default function Sidebar() {
                         }
                       ></i>
                       Profile
+                    </a>
+                  </Link>
+                </li>
+
+                {/* /faculty end/ */}
+              </ul>
+            )}
+            {role === "student" && (
+              <ul className="md:flex-col md:min-w-full flex flex-col list-none">
+                <li className="items-center">
+                  <Link href="/student/dashboard/dashboard">
+                    <a
+                      href="#pablo"
+                      className={
+                        "text-xs uppercase py-3 font-bold block " +
+                        (router.pathname.indexOf(
+                          "/student/dashboard/dashboard"
+                        ) !== -1
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                    >
+                      <i
+                        className={
+                          "fas fa-tv mr-2 text-sm " +
+                          (router.pathname.indexOf(
+                            "/student/dashboard/dashboard"
+                          ) !== -1
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      ></i>{" "}
+                      Dashboard
+                    </a>
+                  </Link>
+                </li>
+                <li className="items-center">
+                  <Link href="/student/dashboard/profile">
+                    <a
+                      href="#pablo"
+                      className={
+                        "text-xs uppercase py-3 font-bold block " +
+                        (router.pathname.indexOf(
+                          "/student/dashboard/profile"
+                        ) !== -1
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                    >
+                      <i
+                        className={
+                          "fas fa-tv mr-2 text-sm " +
+                          (router.pathname.indexOf(
+                            "/student/dashboard/profile"
+                          ) !== -1
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      ></i>{" "}
+                      Profile
+                    </a>
+                  </Link>
+                </li>
+                <li className="items-center">
+                  <Link href="/student/dashboard/projects">
+                    <a
+                      href="#pablo"
+                      className={
+                        "text-xs uppercase py-3 font-bold block " +
+                        (router.pathname.indexOf(
+                          "/student/dashboard/projects"
+                        ) !== -1
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                    >
+                      <i
+                        className={
+                          "fas fa-tv mr-2 text-sm " +
+                          (router.pathname.indexOf(
+                            "/student/dashboard/projects"
+                          ) !== -1
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      ></i>
+                      Project
+                    </a>
+                  </Link>
+                </li>
+                <li className="items-center">
+                  <Link href="/student/dashboard/request">
+                    <a
+                      href="#pablo"
+                      className={
+                        "text-xs uppercase py-3 font-bold block " +
+                        (router.pathname.indexOf(
+                          "/student/dashboard/request"
+                        ) !== -1
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                    >
+                      <i
+                        className={
+                          "fas fa-tv mr-2 text-sm " +
+                          (router.pathname.indexOf(
+                            "/student/dashboard/request"
+                          ) !== -1
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      ></i>
+                      Request
+                    </a>
+                  </Link>
+                </li>
+                <li className="items-center">
+                  <Link href="/student/dashboard/review">
+                    <a
+                      href="#pablo"
+                      className={
+                        "text-xs uppercase py-3 font-bold block " +
+                        (router.pathname.indexOf(
+                          "/student/dashboard/review"
+                        ) !== -1
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                    >
+                      <i
+                        className={
+                          "fas fa-tv mr-2 text-sm " +
+                          (router.pathname.indexOf(
+                            "/student/dashboard/review"
+                          ) !== -1
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      ></i>
+                      Review
                     </a>
                   </Link>
                 </li>

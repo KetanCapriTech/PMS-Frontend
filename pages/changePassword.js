@@ -1,34 +1,35 @@
 import React, { useState } from "react";
-function AddStudentForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [department, setDepartment] = useState("");
-  const [enrollmentNumber, setEnrollmentNumber] = useState("");
-  const bearerToken = localStorage.getItem("token");
+import { useRouter } from "next/router";
 
-  const handleSubmit = async () => {
+function ChangePassword() {
+  const [email, setEmail] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const router = useRouter();
+
+  const changePassword = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/add-student",
+        "http://localhost:5000/api/users/change-password",
         {
           method: "POST",
           body: JSON.stringify({
-            name: name,
             email: email,
-            department: department,
-            enrollment_number: enrollmentNumber,
+            password: oldPassword,
+            newPassword: newPassword,
           }),
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${bearerToken}`,
           },
         }
       );
-      const data = await response.json();
-      console.log(data);
-
-      // Display the updated data to the UI
-      // ...
+      if (!response.ok) {
+        throw new Error("Error changing password");
+      }
+      const responseData = await response.json();
+      router.push("/login");
+      alert("password changed");
+      return responseData;
     } catch (error) {
       console.error(error);
     }
@@ -36,18 +37,6 @@ function AddStudentForm() {
 
   return (
     <div className="flex flex-col space-y-4 p-8">
-      <div className="flex flex-col ">
-        <label htmlFor="name" className="mb-1 font-medium text-gray-700 p-2">
-          Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          className="px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-        />
-      </div>
       <br></br>
       <div className="flex flex-col">
         <label htmlFor="email" className="mb-1 font-medium text-gray-700">
@@ -64,13 +53,13 @@ function AddStudentForm() {
       <br></br>
       <div className="flex flex-col">
         <label htmlFor="department" className="mb-1 font-medium text-gray-700">
-          Department
+          Old Password
         </label>
         <input
-          type="text"
-          id="department"
-          value={department}
-          onChange={(event) => setDepartment(event.target.value)}
+          type="password"
+          id="password"
+          placeholder="old password"
+          onChange={(event) => setOldPassword(event.target.value)}
           className="px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
         />
       </div>
@@ -80,25 +69,25 @@ function AddStudentForm() {
           htmlFor="enrollmentNumber"
           className="mb-1 font-medium text-gray-700"
         >
-          Enrollment Number
+          New Password
         </label>
         <input
-          type="text"
-          id="enrollmentNumber"
-          value={enrollmentNumber}
-          onChange={(event) => setEnrollmentNumber(event.target.value)}
+          type="password"
+          id="password"
+          placeholder="New Password"
+          onChange={(event) => setNewPassword(event.target.value)}
           className="px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
         />
       </div>
       <br></br>
       <button
-        onClick={handleSubmit}
+        onClick={changePassword}
         className="bg-indigo-500 w-full lg:w-8 mt-4 mb-4  pt-4 pb-4 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
-        Add Student
+        Submit
       </button>
     </div>
   );
 }
 
-export default AddStudentForm;
+export default ChangePassword;

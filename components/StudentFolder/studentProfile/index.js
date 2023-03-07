@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useRouter } from "next/router";
 
@@ -14,13 +13,12 @@ function StudentProfile() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    setIsUpdatePasswordShown(true);
+  };
   const handleClose = () => setOpen(false);
   const router = useRouter();
-
-  const handleUpdatePasswordClick = () => {
-    setIsUpdatePasswordShown(!isUpdatePasswordShown);
-  };
 
   const handleOldPasswordChange = (event) => {
     setOldPassword(event.target.value);
@@ -50,13 +48,15 @@ function StudentProfile() {
           },
         }
       );
+
+      if (response.ok) {
+        const responseData = await response.json();
+        router.push("/login");
+        return responseData;
+      }
       if (!response.ok) {
         throw new Error("Error changing password");
       }
-      const responseData = await response.json();
-      router.push("/login");
-      alert("password changed");
-      return responseData;
     } catch (error) {
       console.error(error);
     }
@@ -187,13 +187,8 @@ function StudentProfile() {
                   <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
                   University of Computer Science
                 </div>
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
-                  onClick={handleUpdatePasswordClick}
-                >
-                  Update Password
-                </button>
-                <Button onClick={handleOpen}>Open modal</Button>
+
+                <Button onClick={handleOpen}>Update Password</Button>
                 <Modal
                   open={open}
                   onClose={handleClose}
@@ -203,64 +198,63 @@ function StudentProfile() {
                   <Box sx={style}>
                     {isUpdatePasswordShown && (
                       <div className="mt-4">
-                        <form onSubmit={changePassword}>
-                          <div className="mb-4">
-                            <label
-                              className="block text-gray-700 font-bold mb-2"
-                              htmlFor="old-password-input"
-                            >
-                              Old Password
-                            </label>
-                            <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="old-password-input"
-                              type="password"
-                              placeholder="********"
-                              value={oldPassword}
-                              onChange={handleOldPasswordChange}
-                            />
-                          </div>
-                          <div className="mb-4">
-                            <label
-                              className="block text-gray-700 font-bold mb-2"
-                              htmlFor="new-password-input"
-                            >
-                              New Password
-                            </label>
-                            <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="new-password-input"
-                              type="password"
-                              placeholder="********"
-                              value={newPassword}
-                              onChange={handleNewPasswordChange}
-                            />
-                          </div>
-                          <div className="mb-6">
-                            <label
-                              className="block text-gray-700 font-bold mb-2"
-                              htmlFor="confirm-password-input"
-                            >
-                              Confirm Password
-                            </label>
-                            <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              id="confirm-password-input"
-                              type="password"
-                              placeholder="********"
-                              value={confirmPassword}
-                              onChange={handleConfirmPasswordChange}
-                            />
-                          </div>
-                          <div className="flex items-center justify-center">
-                            <button
-                              className="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
-                              type="submit"
-                            >
-                              Submit
-                            </button>
-                          </div>
-                        </form>
+                        <div className="mb-4">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="old-password-input"
+                          >
+                            Old Password
+                          </label>
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="old-password-input"
+                            type="password"
+                            placeholder="********"
+                            value={oldPassword}
+                            onChange={handleOldPasswordChange}
+                          />
+                        </div>
+                        <div className="mb-4">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="new-password-input"
+                          >
+                            New Password
+                          </label>
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="new-password-input"
+                            type="password"
+                            placeholder="********"
+                            value={newPassword}
+                            onChange={handleNewPasswordChange}
+                          />
+                        </div>
+                        <div className="mb-6">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="confirm-password-input"
+                          >
+                            Confirm Password
+                          </label>
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="confirm-password-input"
+                            type="password"
+                            placeholder="********"
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChange}
+                          />
+                        </div>
+                        <div className="flex items-center justify-center">
+                          <button
+                            className="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
+                            type="submit"
+                            onClick={changePassword}
+                          >
+                            Submit
+                          </button>
+                        </div>
                       </div>
                     )}
                   </Box>

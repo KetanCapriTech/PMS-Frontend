@@ -11,10 +11,9 @@ const StudentTab = () => {
   const [enrollmentNumber, setEnrollmentNumber] = useState("");
 
   const bearerToken = localStorage.getItem("token");
-  console.log(bearerToken);
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/users/students`, {
+      const response = await fetch(`http://localhost:5000/api/admin/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +44,7 @@ const StudentTab = () => {
     setIsEditOpen(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/student/${id}`,
+        `http://localhost:5000/api/admin/update-student/${id}`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -75,7 +74,7 @@ const StudentTab = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/student/${id}`,
+        `http://localhost:5000/api/admin/delete-student/${id}`,
         {
           method: "DELETE",
           headers: {

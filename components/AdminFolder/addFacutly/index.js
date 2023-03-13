@@ -3,18 +3,20 @@ import React, { useState } from "react";
 function AddFacultyForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [department, setDepartment] = useState("");
   const bearerToken = localStorage.getItem("token");
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/add-faculty",
+        "http://localhost:5000/api/admin/add-faculty",
         {
           method: "POST",
           body: JSON.stringify({
             name: name,
             email: email,
             department: department,
+            phoneNumber: phone,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -68,6 +70,19 @@ function AddFacultyForm() {
           id="department"
           value={department}
           onChange={(event) => setDepartment(event.target.value)}
+          className="px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+        />
+      </div>
+      <br></br>
+      <div className="flex flex-col">
+        <label htmlFor="department" className="mb-1 font-medium text-gray-700">
+          Phone Number
+        </label>
+        <input
+          type="text"
+          id="department"
+          value={phone}
+          onChange={(event) => setPhone(event.target.value)}
           className="px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
         />
       </div>

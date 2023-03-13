@@ -12,7 +12,7 @@ function FacultyCsv() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/add-faculties",
+        "http://localhost:5000/api/admin/add-faculties",
         {
           method: "POST",
           body: formData,
@@ -58,6 +58,7 @@ function FacultyCsv() {
               <td class="p-3">{row[0]}</td>
               <td class="p-3">{row[1]}</td>
               <td class="p-3">{row[2]}</td>
+              <td class="p-3">{row[3]}</td>
             </tr>
           ))}
         </tbody>
@@ -75,6 +76,7 @@ function FacultyCsv() {
                 <th class="p-3 text-left">Name</th>
                 <th class="p-3 text-left">Email</th>
                 <th class="p-3 text-left">Department</th>
+                <th class="p-3 text-left">Phone Number</th>
               </tr>
             </thead>
             <tbody>
@@ -83,6 +85,7 @@ function FacultyCsv() {
                   <td class="p-3">{row.name}</td>
                   <td class="p-3">{row.email}</td>
                   <td class="p-3">{row.department}</td>
+                  <td class="p-3">{row.phoneNumber}</td>
                 </tr>
               ))}
             </tbody>

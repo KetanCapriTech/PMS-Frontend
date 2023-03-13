@@ -11,21 +11,19 @@ const FacultyTab = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/faculties",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${bearerToken}`,
-          },
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/admin/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${bearerToken}`,
+        },
+      });
       const data = await response.json();
       console.log(data);
-      if (data && data.faculty) {
-        setMyArray(data.faculty);
+      if (data && data.faculties) {
+        setMyArray(data.faculties);
       }
+      console.log(myArray);
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +36,7 @@ const FacultyTab = () => {
   const handleUpdate = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/faculty/${id}`,
+        `http://localhost:5000/api/admin/update-faculty/${id}`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -67,7 +65,7 @@ const FacultyTab = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/student/${id}`,
+        `http://localhost:5000/api/admin/delete-faculty/${id}`,
         {
           method: "DELETE",
           headers: {

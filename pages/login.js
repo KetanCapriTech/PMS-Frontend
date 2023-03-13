@@ -28,7 +28,10 @@ const Login = () => {
       });
       const data = await response.json();
       console.log(data);
-      if (data.passwordChanged === false) {
+      if (
+        data.message ===
+        "Please change your password by calling /api/users/change-password"
+      ) {
         router.push("/changePassword");
       } else if (response.ok) {
         localStorage.setItem("token", data.token);

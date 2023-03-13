@@ -12,7 +12,7 @@ function StudentCsv() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/add-students",
+        "http://localhost:5000/api/admin/add-students",
         {
           method: "POST",
           body: formData,

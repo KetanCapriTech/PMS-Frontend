@@ -11,13 +11,16 @@ const FacultyTab = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${bearerToken}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${bearerToken}`,
+          },
+        }
+      );
       const data = await response.json();
       console.log(data);
       if (data && data.faculties) {
@@ -36,7 +39,7 @@ const FacultyTab = () => {
   const handleUpdate = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/update-faculty/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/update-faculty/${id}`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -65,7 +68,7 @@ const FacultyTab = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/delete-faculty/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/delete-faculty/${id}`,
         {
           method: "DELETE",
           headers: {

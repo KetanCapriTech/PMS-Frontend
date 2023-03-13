@@ -13,13 +13,16 @@ const StudentTab = () => {
   const bearerToken = localStorage.getItem("token");
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${bearerToken}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${bearerToken}`,
+          },
+        }
+      );
       const data = await response.json();
       console.log(data);
       if (data && data.students) {
@@ -44,7 +47,7 @@ const StudentTab = () => {
     setIsEditOpen(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/update-student/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/student/${id}`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -74,7 +77,7 @@ const StudentTab = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/delete-student/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/student/${id}`,
         {
           method: "DELETE",
           headers: {

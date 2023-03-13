@@ -37,7 +37,7 @@ function ProjectDetails() {
       const token = localStorage.getItem("token"); // Replace with your actual token
 
       const response = await fetch(
-        `http://localhost:5000/api/projects/student/${userId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/student/${userId}`,
         {
           method: "GET",
           headers: {
@@ -75,7 +75,7 @@ function ProjectDetails() {
         for (const studentId of data.student) {
           if (studentId) {
             const response = await fetch(
-              `http://localhost:5000/api/users/student/${studentId}`,
+              `${process.env.NEXT_PUBLIC_API_URL}/api/users/student/${studentId}`,
               {
                 method: "GET",
                 headers: {
@@ -118,7 +118,7 @@ function ProjectDetails() {
 
   const handleProjectDetailsSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:5000/", {
+      const response = await fetch("`${process.env.NEXT_PUBLIC_API_URL}/", {
         method: "PUT",
         body: JSON.stringify({
           title: title,
@@ -145,7 +145,7 @@ function ProjectDetails() {
   const handleRemoveUser = async (studentId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/projects/:id/students/${studentId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/:id/students/${studentId}`,
         {
           method: "DELETE",
           headers: {
@@ -171,7 +171,7 @@ function ProjectDetails() {
   useEffect(() => {
     async function fetchFacultyData() {
       const response = await fetch(
-        `http://localhost:5000/api/users/faculty/${facultId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/faculty/${facultId}`,
         {
           method: "GET",
           headers: {

@@ -61,7 +61,7 @@ function StudentProfile() {
   const changePassword = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/change-password",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/change-password`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -93,7 +93,7 @@ function StudentProfile() {
       setLoading(true);
       try {
         const response = await fetch(
-          "http://localhost:5000/api/users/profile",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/users/profile`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -113,19 +113,22 @@ function StudentProfile() {
 
   const handleEditProfile = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/profile", {
-        method: "PUT",
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          department: department,
-          enrollment_number: enrollment,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/profile`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            department: department,
+            enrollment_number: enrollment,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       if (response.ok) {
         const responseData = await response.json();

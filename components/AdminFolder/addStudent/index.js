@@ -9,7 +9,7 @@ function AddStudentForm() {
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/add-student",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/add-student`,
         {
           method: "POST",
           body: JSON.stringify({

@@ -10,7 +10,7 @@ function ChangePassword() {
   const changePassword = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/change-password",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/change-password`,
         {
           method: "POST",
           headers: {

@@ -6,7 +6,7 @@ export async function getProjectDetails(userId: string): Promise<Response> {
   try {
     const token = localStorage.getItem("token"); // Replace with your actual token
     const response = await fetch(
-      `http://localhost:5000/api/projects/student/${userId}`,
+      ``${process.env.NEXT_PUBLIC_API_URL}/api/projects/student/${userId}`,
       {
         method: "GET",
         headers: {

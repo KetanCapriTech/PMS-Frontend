@@ -9,17 +9,20 @@ function StudentProject() {
     e.preventDefault();
     const bearerToken = localStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:5000/api/projects", {
-        method: "POST",
-        body: JSON.stringify({
-          title: title,
-          description: description,
-        }),
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/projects`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            title: title,
+            description: description,
+          }),
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       console.log(data);
       if (response.status === 400) {

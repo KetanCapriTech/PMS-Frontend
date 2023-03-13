@@ -12,7 +12,7 @@ function FacultyCsv() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/add-faculties",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/add-faculties`,
         {
           method: "POST",
           body: formData,

@@ -9,7 +9,7 @@ function Group() {
       const token = localStorage.getItem("token"); // Replace with your actual token
       const userId = localStorage.getItem("id");
       const response = await fetch(
-        `http://localhost:5000/api/projects/student/${userId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/student/${userId}`,
         {
           method: "GET",
           headers: {

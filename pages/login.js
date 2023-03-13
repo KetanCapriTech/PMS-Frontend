@@ -32,10 +32,10 @@ const Login = () => {
         router.push("/changePassword");
       } else if (response.ok) {
         localStorage.setItem("token", data.token);
-        localStorage.setItem(data.message, data.token);
         localStorage.setItem("role", data.role);
         roleBasedLogin(data.role);
         localStorage.setItem("email", data.email);
+        localStorage.setItem("id", data.userId);
         localStorage.setItem("hhjklmno-hjsohjso-toKeN", "login success");
       } else {
         alert("incorrect id password ");

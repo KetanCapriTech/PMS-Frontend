@@ -1,0 +1,91 @@
+<div className="max-w-sm rounded overflow-hidden shadow-lg">
+  <div className="px-6 py-4">
+    <div className="font-bold text-xl mb-2">Group Data</div>
+    {allStudentData.map((student, index) => (
+    <div key="{index}">
+      <p className="text-gray-700 text-base mb-2">
+        <strong>Name:</strong> {student.name}
+      </p>
+      <p className="text-gray-700 text-base mb-2">
+        <strong>User ID:</strong> {student._id}
+      </p>
+      <p className="text-gray-700 text-base mb-2">
+        <strong>Email:</strong> {student.email}
+      </p>
+      <p className="text-gray-700 text-base mb-2">
+        <strong>Enrollment Number:</strong>{" "} {student.enrollment_number}
+      </p>
+      {index !== allStudentData.length - 1 && <br />}
+    </div>
+    ))}
+  </div>
+</div>
+
+/// {userData.map((data) => (
+<div class="bg-white rounded-lg shadow-md overflow-hidden">
+  <h1 className="font-bold p-4">Project Details</h1>
+
+  <div class="px-6 py-4">
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+    >
+      title
+    </span>
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
+    >
+      {data.title}
+    </span>
+  </div>
+  <div class="px-6 py-4">
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+    >
+      Description
+    </span>
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
+    >
+      {data.description}
+    </span>
+  </div>
+
+  <div class="px-6 py-4">
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+    >
+      Invite code
+    </span>
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
+    >
+      {data.invite_code}
+    </span>
+  </div>
+  <div class="px-6 py-4">
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+    >
+      Status
+    </span>
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
+    >
+      {data.status}
+    </span>
+  </div>
+
+  <div class="px-6 py-4">
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
+    >
+      Capacity
+    </span>
+    <span
+      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
+    >
+      {data.capacity}
+    </span>
+  </div>
+</div>
+))}

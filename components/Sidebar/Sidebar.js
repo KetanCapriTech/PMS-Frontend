@@ -480,7 +480,7 @@ export default function Sidebar() {
                             : "text-blueGray-300")
                         }
                       ></i>
-                      Request
+                      Group
                     </a>
                   </Link>
                 </li>
@@ -507,11 +507,10 @@ export default function Sidebar() {
                             : "text-blueGray-300")
                         }
                       ></i>
-                      Review
+                      Submission
                     </a>
                   </Link>
                 </li>
-
                 {/* /faculty end/ */}
               </ul>
             )}

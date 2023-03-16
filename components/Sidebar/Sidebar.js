@@ -1,8 +1,8 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-no-target-blank */
-import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "components/Dropdowns/UserDropdown.js";
@@ -10,7 +10,11 @@ import UserDropdown from "components/Dropdowns/UserDropdown.js";
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
-  const role = localStorage.getItem("role");
+  let role;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    role = localStorage.getItem("role");
+  }
   // console.log(role);
   const handleLogout = () => {
     localStorage.clear();
@@ -81,7 +85,7 @@ export default function Sidebar() {
             <form className="mt-6 mb-4 md:hidden">
               <div className="mb-3 pt-0">
                 <input
-                  type="text"
+                  type="password"
                   placeholder="Search"
                   className="border-0 px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
                 />
@@ -263,13 +267,13 @@ export default function Sidebar() {
             {role === "faculty" && (
               <ul className="md:flex-col md:min-w-full flex flex-col list-none">
                 <li className="items-center">
-                  <Link href="/faculty/dashboard/allocatedProject">
+                  <Link href="/faculty/dashboard/dashboard">
                     <a
                       href="#pablo"
                       className={
                         "text-xs uppercase py-3 font-bold block " +
                         (router.pathname.indexOf(
-                          "/faculty/dashboard/allocatedProject"
+                          "/faculty/dashboard/dashboard"
                         ) !== -1
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
@@ -279,67 +283,13 @@ export default function Sidebar() {
                         className={
                           "fas fa-tv mr-2 text-sm " +
                           (router.pathname.indexOf(
-                            "/faculty/dashboard/allocatedProject"
-                          ) !== -1
-                            ? "opacity-75"
-                            : "text-blueGray-300")
-                        }
-                      ></i>{" "}
-                      Allocated Project
-                    </a>
-                  </Link>
-                </li>
-                <li className="items-center">
-                  <Link href="/faculty/dashboard/assignedProject">
-                    <a
-                      href="#pablo"
-                      className={
-                        "text-xs uppercase py-3 font-bold block " +
-                        (router.pathname.indexOf(
-                          "/faculty/dashboard/assignedProject"
-                        ) !== -1
-                          ? "text-lightBlue-500 hover:text-lightBlue-600"
-                          : "text-blueGray-700 hover:text-blueGray-500")
-                      }
-                    >
-                      <i
-                        className={
-                          "fas fa-tv mr-2 text-sm " +
-                          (router.pathname.indexOf(
-                            "/faculty/dashboard/assignedProject"
-                          ) !== -1
-                            ? "opacity-75"
-                            : "text-blueGray-300")
-                        }
-                      ></i>{" "}
-                      Assigned Project
-                    </a>
-                  </Link>
-                </li>
-                <li className="items-center">
-                  <Link href="/faculty/dashboard/projectToApprove">
-                    <a
-                      href="#pablo"
-                      className={
-                        "text-xs uppercase py-3 font-bold block " +
-                        (router.pathname.indexOf(
-                          "/faculty/dashboard/projectToApprove"
-                        ) !== -1
-                          ? "text-lightBlue-500 hover:text-lightBlue-600"
-                          : "text-blueGray-700 hover:text-blueGray-500")
-                      }
-                    >
-                      <i
-                        className={
-                          "fas fa-tv mr-2 text-sm " +
-                          (router.pathname.indexOf(
-                            "/faculty/dashboard/projectToApprove"
+                            "/faculty/dashboard/dashboard"
                           ) !== -1
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
                       ></i>
-                      Project To Approve
+                      Dashboard
                     </a>
                   </Link>
                 </li>
@@ -367,6 +317,60 @@ export default function Sidebar() {
                         }
                       ></i>
                       Profile
+                    </a>
+                  </Link>
+                </li>
+                <li className="items-center">
+                  <Link href="/faculty/dashboard/groups">
+                    <a
+                      href="#pablo"
+                      className={
+                        "text-xs uppercase py-3 font-bold block " +
+                        (router.pathname.indexOf(
+                          "/faculty/dashboard/groups"
+                        ) !== -1
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                    >
+                      <i
+                        className={
+                          "fas fa-tv mr-2 text-sm " +
+                          (router.pathname.indexOf(
+                            "/faculty/dashboard/groups"
+                          ) !== -1
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      ></i>
+                      Groups
+                    </a>
+                  </Link>
+                </li>
+                <li className="items-center">
+                  <Link href="/faculty/dashboard/requests">
+                    <a
+                      href="#pablo"
+                      className={
+                        "text-xs uppercase py-3 font-bold block " +
+                        (router.pathname.indexOf(
+                          "/faculty/dashboard/requests"
+                        ) !== -1
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                    >
+                      <i
+                        className={
+                          "fas fa-tv mr-2 text-sm " +
+                          (router.pathname.indexOf(
+                            "/faculty/dashboard/requests"
+                          ) !== -1
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      ></i>
+                      Requests
                     </a>
                   </Link>
                 </li>

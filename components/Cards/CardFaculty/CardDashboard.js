@@ -1,9 +1,9 @@
-import ProjectToApprove from "components/Facultyfolder/projectToApprove";
+import Dashboard from "components/Facultyfolder/dashboard";
 import React from "react";
 
 // components
 
-export default function CardProjectApproved() {
+export default function CardDashboard() {
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full p-8 shadow-lg rounded">
@@ -11,14 +11,14 @@ export default function CardProjectApproved() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <h3 className="font-bold text-base text-center  ">
-                Projects To Approve
+                Assigned Projects
               </h3>
             </div>
           </div>
         </div>
         {/* content here */}
         <div>
-          <ProjectToApprove />
+          <Dashboard />
         </div>
       </div>
     </>

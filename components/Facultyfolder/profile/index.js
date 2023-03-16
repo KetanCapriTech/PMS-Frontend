@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useRouter } from "next/router";
-
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 function Profile() {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,10 @@ function Profile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
-  const [enrollment, setEnrollment] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [maxProjects, setMaxProjects] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   const [isUpdateProfile, setIsUpdateProfile] = useState(false);
   const [openProfile, setOpenProfile] = React.useState(false);
 
@@ -51,11 +54,18 @@ function Profile() {
   const handleEmail = (event) => {
     setEmail(event.target.value);
   };
+
   const handleDepartment = (event) => {
     setDepartment(event.target.value);
   };
-  const handleEnrollment = (event) => {
-    setEnrollment(event.target.value);
+  const handleDesignation = (event) => {
+    setDesignation(event.target.value);
+  };
+  const handleMaxProjects = (event) => {
+    setMaxProjects(event.target.value);
+  };
+  const handlePhoneNumber = (event) => {
+    setPhoneNumber(event.target.value);
   };
 
   const changePassword = async () => {
@@ -65,7 +75,7 @@ function Profile() {
         {
           method: "POST",
           body: JSON.stringify({
-            email: userData.user.email,
+            email: userData.email,
             password: oldPassword,
             newPassword: newPassword,
           }),
@@ -101,6 +111,7 @@ function Profile() {
           }
         );
         const data = await response.json();
+        console.log(userData.name);
         setUserData(data);
         setLoading(false);
       } catch (error) {
@@ -114,14 +125,16 @@ function Profile() {
   const handleEditProfile = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/users/profile`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/faculty/profile`,
         {
           method: "PUT",
           body: JSON.stringify({
             name: name,
             email: email,
             department: department,
-            enrollment_number: enrollment,
+            designation: designation,
+            maxProjects: maxProjects,
+            phoneNumber: phoneNumber,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -156,11 +169,13 @@ function Profile() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-4">
+    <>
       {loading ? (
-        <p>Loading...</p>
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
       ) : (
-        <>
+        <div>
           <h1 className="text-3xl text-center pb-4 font-bold mb-4">
             User Profile
           </h1>
@@ -183,17 +198,17 @@ function Profile() {
                 <div className="bg-gray-400 rounded-lg shadow-md p-4">
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">Name : </label>
-                    {userData.user && (
+                    {userData && (
                       <label className="text-red-500 font-bold">
-                        {userData.user.name}
+                        {userData.name}
                       </label>
                     )}
                   </div>
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">Email : </label>
-                    {userData.user && (
+                    {userData && (
                       <label className="text-red-500 font-bold">
-                        {userData.user.email}
+                        {userData.email}
                       </label>
                     )}
                   </div>
@@ -202,22 +217,43 @@ function Profile() {
                     <label className="text-gray-600 font-bold">
                       Department :
                     </label>
-                    {userData.user && (
+                    {userData && (
                       <label className="text-red-500 font-bold">
-                        {userData.user.department}
+                        {userData.department}
                       </label>
                     )}
                   </div>
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">
-                      Enrollment Number :
+                      Department :
                     </label>
-                    {userData.user && (
+                    {userData && (
                       <label className="text-red-500 font-bold">
-                        {userData.user.enrollment_number}
+                        {userData.department}
                       </label>
                     )}
                   </div>
+                  <div className="mb-4">
+                    <label className="text-gray-600 font-bold">
+                      Max Projects :
+                    </label>
+                    {userData && (
+                      <label className="text-red-500 font-bold">
+                        {userData.maxProjects}
+                      </label>
+                    )}
+                  </div>
+                  <div className="mb-4">
+                    <label className="text-gray-600 font-bold">
+                      Phone Number:
+                    </label>
+                    {userData && (
+                      <label className="text-red-500 font-bold">
+                        {userData.phoneNumber}
+                      </label>
+                    )}
+                  </div>
+
                   <Button onClick={handleProfileEditOpen}>Edit Profile</Button>
                 </div>
                 <div className="mb-2 text-blueGray-600 mt-10">
@@ -330,7 +366,7 @@ function Profile() {
                             className="block text-gray-700 font-bold mb-2"
                             htmlFor="email-input"
                           >
-                            Email
+                            Email address
                           </label>
                           <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -339,6 +375,22 @@ function Profile() {
                             placeholder="Your Email"
                             value={email}
                             onChange={handleEmail}
+                          />
+                        </div>
+                        <div className="mb-6">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="department-input"
+                          >
+                            Designation
+                          </label>
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="department-input"
+                            type="text"
+                            placeholder="Department"
+                            value={designation}
+                            onChange={handleDesignation}
                           />
                         </div>
                         <div className="mb-6">
@@ -360,17 +412,33 @@ function Profile() {
                         <div className="mb-6">
                           <label
                             className="block text-gray-700 font-bold mb-2"
-                            htmlFor="enrollment-input"
+                            htmlFor="department-input"
                           >
-                            Enrollment number
+                            Max Projects
                           </label>
                           <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="enrollment-input"
+                            id="department-input"
                             type="text"
-                            placeholder="Enrollment"
-                            value={enrollment}
-                            onChange={handleEnrollment}
+                            placeholder="Department"
+                            value={maxProjects}
+                            onChange={handleMaxProjects}
+                          />
+                        </div>
+                        <div className="mb-6">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="department-input"
+                          >
+                            Phone Number
+                          </label>
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="department-input"
+                            type="text"
+                            placeholder="Department"
+                            value={phoneNumber}
+                            onChange={handlePhoneNumber}
                           />
                         </div>
                         <div className="flex items-center justify-center">
@@ -389,9 +457,9 @@ function Profile() {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 

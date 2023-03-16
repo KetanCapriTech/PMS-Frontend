@@ -3,7 +3,11 @@ import React, { useState } from "react";
 function StudentCsv() {
   const [csvData, setCsvData] = useState([]);
   const [responseData, setResponseData] = useState([]);
-  const bearerToken = localStorage.getItem("token");
+  let bearerToken;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    bearerToken = localStorage.getItem("token");
+  }
 
   const handleOnDrop = async (event) => {
     const file = event.target.files[0];

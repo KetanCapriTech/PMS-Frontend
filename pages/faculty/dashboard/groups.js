@@ -1,16 +1,16 @@
 import React from "react";
 import DashboardView from "layouts/DashboardView.js";
-import CardAssignedProject from "components/Cards/CardFaculty/CardAssignedProject";
+import CardGroups from "components/Cards/CardFaculty/CardGroups";
 
-export default function AssignedProject() {
+export default function Groups() {
   return (
     <>
       <div className="flex flex-wrap"></div>
       <div className="flex flex-wrap mt-4">
-        <CardAssignedProject />
+        <CardGroups />
       </div>
     </>
   );
 }
 
-AssignedProject.layout = DashboardView;
+Groups.layout = DashboardView;

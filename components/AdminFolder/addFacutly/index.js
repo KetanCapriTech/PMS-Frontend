@@ -5,7 +5,11 @@ function AddFacultyForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [department, setDepartment] = useState("");
-  const bearerToken = localStorage.getItem("token");
+  let bearerToken;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    bearerToken = localStorage.getItem("token");
+  }
   const handleSubmit = async () => {
     try {
       const response = await fetch(

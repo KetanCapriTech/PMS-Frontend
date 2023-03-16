@@ -26,10 +26,6 @@ function StudentProfile() {
   };
   const handleClose = () => setOpen(false);
 
-  const handleProfileEditOpen = () => {
-    setOpenProfile(true);
-    setIsUpdateProfile(true);
-  };
   const handleProfileEditClose = () => setOpenProfile(false);
   const router = useRouter();
 
@@ -93,7 +89,7 @@ function StudentProfile() {
       setLoading(true);
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/users/profile`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/student/profile`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -110,38 +106,6 @@ function StudentProfile() {
     };
     fetchUserData();
   }, []);
-
-  const handleEditProfile = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/users/profile`,
-        {
-          method: "PUT",
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            department: department,
-            enrollment_number: enrollment,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-
-      if (response.ok) {
-        const responseData = await response.json();
-        router.push("/login");
-        return responseData;
-      }
-      if (!response.ok) {
-        throw new Error("Error changing password");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const style = {
     position: "absolute",
@@ -183,42 +147,37 @@ function StudentProfile() {
                 <div className="bg-gray-400 rounded-lg shadow-md p-4">
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">Name : </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user.name}
-                      </label>
-                    )}
+
+                    <label className="text-red-500 font-bold">
+                      {userData.name}
+                    </label>
                   </div>
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">Email : </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user.email}
-                      </label>
-                    )}
+
+                    <label className="text-red-500 font-bold">
+                      {userData.email}
+                    </label>
                   </div>
 
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">
                       Department :
                     </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user.department}
-                      </label>
-                    )}
+
+                    <label className="text-red-500 font-bold">
+                      {userData.department}
+                    </label>
                   </div>
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">
                       Enrollment Number :
                     </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user.enrollment_number}
-                      </label>
-                    )}
+
+                    <label className="text-red-500 font-bold">
+                      {userData.enrollment_number}
+                    </label>
                   </div>
-                  <Button onClick={handleProfileEditOpen}>Edit Profile</Button>
                 </div>
                 <div className="mb-2 text-blueGray-600 mt-10">
                   <i className=" mr-2 text-lg text-blueGray-400"></i>
@@ -372,15 +331,6 @@ function StudentProfile() {
                             value={enrollment}
                             onChange={handleEnrollment}
                           />
-                        </div>
-                        <div className="flex items-center justify-center">
-                          <button
-                            className="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
-                            type="submit"
-                            onClick={handleEditProfile}
-                          >
-                            Submit
-                          </button>
                         </div>
                       </div>
                     )}

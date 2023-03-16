@@ -4,8 +4,11 @@ function AddStudentForm() {
   const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
   const [enrollmentNumber, setEnrollmentNumber] = useState("");
-  const bearerToken = localStorage.getItem("token");
-
+  let bearerToken;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    bearerToken = localStorage.getItem("token");
+  }
   const handleSubmit = async () => {
     try {
       const response = await fetch(

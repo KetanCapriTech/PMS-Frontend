@@ -3,6 +3,11 @@ import React from "react";
 import UserDropdown from "components/Dropdowns/UserDropdown.js";
 
 export default function Navbar() {
+  let role;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    role = localStorage.getItem("role");
+  }
   return (
     <>
       {/* Navbar */}
@@ -14,7 +19,7 @@ export default function Navbar() {
             href="#pablo"
             onClick={(e) => e.preventDefault()}
           >
-            Dashboard
+            {role}
           </a>
           {/* Form */}
           <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">

@@ -12,7 +12,7 @@ function StudentProject() {
   const [userData, setUserData] = useState([]);
   const [leaderEmail, setLeaderEmail] = useState("");
   const [projectId, setProjectId] = useState("");
-  const [inviteCode, setInviteCode] = useState("");
+
   let token;
   let user_Id;
   if (typeof window !== "undefined") {
@@ -86,7 +86,6 @@ function StudentProject() {
       setUserData(data);
       setLeaderEmail(data.leader_email);
       setProjectId(data._id);
-      setInviteCode(data.invite_code);
     } catch (error) {
       console.error(error);
     }
@@ -101,27 +100,6 @@ function StudentProject() {
     setOpen(false);
   };
 
-  const joinProject = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/join/`,
-        {
-          method: "POST",
-          body: JSON.stringify({ invite_code: inviteCode }),
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      console.log("joined");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <div className="w-full max-w-xs p-4">
       <div className="bg-white rounded-lg shadow-xl  p-4 flex-grow ">
@@ -134,7 +112,6 @@ function StudentProject() {
               <strong>Title : </strong>
               {userData.title}
             </div>
-
             <div className="mb-2">
               <strong>Description : </strong>
               {userData.description}
@@ -164,7 +141,6 @@ function StudentProject() {
               <strong>Company : </strong>
               {userData.company}
             </div>
-
             <div className="mb-2">
               <strong>Project Type : </strong>
               {userData.project_type}
@@ -174,10 +150,12 @@ function StudentProject() {
                 <strong>Invite Code : </strong>
                 {userData.invite_code}
               </div>
+            )}{" "}
+            {user_Id === leaderEmail && (
+              <Button variant="outlined" onClick={handleClickOpen}>
+                Update Project
+              </Button>
             )}
-            <Button variant="outlined" onClick={handleClickOpen}>
-              Update Project
-            </Button>
           </div>
         )}
       </div>

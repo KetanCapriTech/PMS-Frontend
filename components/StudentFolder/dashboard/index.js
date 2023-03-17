@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
 function ProjectDetails() {
@@ -41,7 +42,13 @@ function ProjectDetails() {
       <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
         <h1 className="font-bold text-xl mb-2 pb-2">Project Details</h1>
         {userData.length === 0 ? (
-          <div>Project not created yet</div>
+          <div>
+            Project not created yet
+            <br></br>
+            <br></br>
+            <Button>Create Project</Button>
+            <Button>Join Project</Button>
+          </div>
         ) : (
           <div>
             <div className="mb-2">

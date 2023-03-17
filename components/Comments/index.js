@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
+
 import { styled } from "@mui/material/styles";
 
 function index() {
@@ -132,31 +131,39 @@ function index() {
       <div>
         {showCommentBox ? (
           <div className="comment-section">
-            <Div>{"All Comments : "}</Div>
             <br></br>
-            <div
-              className="bg-white rounded-lg shadow-xl p-4"
-              style={{ height: "300px", overflow: "auto" }}
-            >
-              {filteredComments
-                .slice(0, showAll ? filteredComments.length : maxComments)
-                .map((comment) => (
-                  <div key={comment._id} className="my-4">
-                    <p className="text-gray-700 font-bold">{comment.text}</p>
-                    <div className="flex justify-between items-center mt-4">
-                      <p className="text-sm  text-red-500 italic ">
-                        {comment.name}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        {new Date(comment.date).toLocaleString()}
-                      </p>
-                      <button onClick={() => handleCommentDelete(comment._id)}>
-                        Delete
-                      </button>
+            {filteredComments.length === 0 ? (
+              <Div>{"No comments yet : "}</Div>
+            ) : (
+              <div
+                className="bg-white rounded-lg shadow-xl p-4"
+                style={{ height: "300px", overflow: "auto" }}
+              >
+                <Div>{"All Comments : "}</Div>
+                {filteredComments
+                  .slice(0, showAll ? filteredComments.length : maxComments)
+                  .map((comment) => (
+                    <div key={comment._id} className="my-4">
+                      <p className="text-gray-700 font-bold">{comment.text}</p>
+                      <div className="flex justify-between items-center mt-4">
+                        <p className="text-sm  text-red-500 italic ">
+                          {comment.name}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          {new Date(comment.date).toLocaleString()}
+                        </p>
+                        {comment.email === localStorage.getItem("email") && (
+                          <button
+                            onClick={() => handleCommentDelete(comment._id)}
+                          >
+                            Delete
+                          </button>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
-            </div>
+                  ))}
+              </div>
+            )}
             {!showAll && filteredComments.length > maxComments && (
               <>
                 <Button
@@ -209,9 +216,11 @@ function index() {
         </div>
 
         <div className="p-4">
-          <Button variant="contained" color="success" onClick={handleComment}>
-            Send
-          </Button>
+          <>
+            <Button variant="contained" color="success" onClick={handleComment}>
+              Send
+            </Button>
+          </>
         </div>
       </div>
     </>

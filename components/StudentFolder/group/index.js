@@ -58,32 +58,39 @@ function Group() {
       console.error(error);
     }
   };
-
+  const memberArray = Object.values(members);
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        {members.map((member, index) => {
-          const memberId = Object.keys(member)[0];
-          const memberData = member[memberId];
-          return (
-            <div key={memberId} className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-lg font-bold mb-4 p-2">{memberData.name}</h2>
-              <p className="mb-2 p-2">Email: {memberData.email}</p>
-              <p className="mb-2 p-2">
-                Enrollment Number: {memberData.enrollment_number}
-              </p>
-              {user_Id === leaderEmail && index !== 0 ? (
-                <button
-                  className="text-red-500 p-2"
-                  onClick={() => handleDelete(memberData._id)}
-                >
-                  Delete
-                </button>
-              ) : null}
-            </div>
-          );
-        })}
-      </div>
+      {memberArray.length === 0 ? (
+        <p>No data</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+          {memberArray.map((member, index) => {
+            const memberId = Object.keys(member)[0];
+            const memberData = member[memberId];
+
+            return (
+              <div key={memberId} className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-lg font-bold mb-4 p-2">
+                  {memberData.name}
+                </h2>
+                <p className="mb-2 p-2">Email: {memberData.email}</p>
+                <p className="mb-2 p-2">
+                  Enrollment Number: {memberData.enrollment_number}
+                </p>
+                {user_Id === leaderEmail && index !== 0 ? (
+                  <button
+                    className="text-red-500 p-2"
+                    onClick={() => handleDelete(memberData._id)}
+                  >
+                    Delete
+                  </button>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 }

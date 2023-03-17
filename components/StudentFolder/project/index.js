@@ -7,14 +7,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import DialogProps from "@mui/material/Dialog";
-import Chat from "../../Chat/index";
 
 function StudentProject() {
   const [userData, setUserData] = useState([]);
   const [leaderEmail, setLeaderEmail] = useState("");
   const [projectId, setProjectId] = useState("");
-
+  const [inviteCode, setInviteCode] = useState("");
   let token;
   let user_Id;
   if (typeof window !== "undefined") {
@@ -67,7 +65,7 @@ function StudentProject() {
       // Handle error
     }
   }
-
+  //project details
   useEffect(() => {
     fetchDetails();
   }, []);
@@ -84,11 +82,11 @@ function StudentProject() {
         }
       );
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
       setUserData(data);
       setLeaderEmail(data.leader_email);
       setProjectId(data._id);
-      // console.log(facultyID);
+      setInviteCode(data.invite_code);
     } catch (error) {
       console.error(error);
     }
@@ -101,6 +99,27 @@ function StudentProject() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const joinProject = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/join/`,
+        {
+          method: "POST",
+          body: JSON.stringify({ invite_code: inviteCode }),
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      console.log("joined");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -120,7 +139,6 @@ function StudentProject() {
               <strong>Description : </strong>
               {userData.description}
             </div>
-
             <div className="mb-2">
               <div className="flex">
                 <strong>Project Log : </strong>
@@ -151,11 +169,17 @@ function StudentProject() {
               <strong>Project Type : </strong>
               {userData.project_type}
             </div>
+            {user_Id === leaderEmail && (
+              <div className="mb-2 text-red-500">
+                <strong>Invite Code : </strong>
+                {userData.invite_code}
+              </div>
+            )}
+            <Button variant="outlined" onClick={handleClickOpen}>
+              Update Project
+            </Button>
           </div>
         )}
-        <Button variant="outlined" onClick={handleClickOpen}>
-          Update Project
-        </Button>
       </div>
       <br></br>
 

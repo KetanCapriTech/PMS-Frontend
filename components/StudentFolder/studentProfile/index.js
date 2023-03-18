@@ -117,8 +117,7 @@ function StudentProfile() {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
-  };
-
+  }
   return (
     <div className="max-w-md mx-auto mt-4">
       {loading ? (

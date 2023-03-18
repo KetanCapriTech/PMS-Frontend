@@ -9,6 +9,7 @@ function AddStudentForm() {
     // Perform localStorage action
     bearerToken = localStorage.getItem("token");
   }
+ 
   const handleSubmit = async () => {
     try {
       const response = await fetch(
@@ -46,11 +47,15 @@ function AddStudentForm() {
         <input
           type="text"
           id="name"
+          name="name"
           value={name}
+          
           onChange={(event) => setName(event.target.value)}
           className="px-4 py-2 rounded-lg shadow-sm border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
         />
+       
       </div>
+    
       <br></br>
       <div className="flex flex-col">
         <label htmlFor="email" className="mb-1 font-medium text-gray-700">

@@ -108,8 +108,8 @@ function ProjectDetails() {
             faculty_id: faucltyID,
             project_type: projectType,
             semester: semester,
-            frontend_technologies: frontendTechnologies,
-            backend_technologies: backendTechnologies,
+            frontendTechnologies: frontendTechnologies,
+            backendTechnologies: backendTechnologies,
             database: database,
             company: company,
             company_email: companyEmail,
@@ -268,6 +268,22 @@ function ProjectDetails() {
               <option value="IDP (Industry Defined Project)">IDP</option>
               <option value="UDP (User Defined Project)">UDP</option>
             </select>
+            {projectType === "IDP (Industry Defined Project)" && (
+              <>
+                <InputLabel>Company</InputLabel>
+                <TextField
+                  required
+                  id="outlined-required"
+                  onChange={handlecompany}
+                />
+                <InputLabel>Company Email</InputLabel>
+                <TextField
+                  required
+                  id="outlined-required"
+                  onChange={handlecompany_email}
+                />
+              </>
+            )}
             <InputLabel>Semester </InputLabel>
             <select onChange={handleSemester}>
               <option value="">Select an option</option>
@@ -293,18 +309,7 @@ function ProjectDetails() {
               id="outlined-required"
               onChange={handledatabase}
             />
-            <InputLabel>Company</InputLabel>
-            <TextField
-              required
-              id="outlined-required"
-              onChange={handlecompany}
-            />
-            <InputLabel>Company Email</InputLabel>
-            <TextField
-              required
-              id="outlined-required"
-              onChange={handlecompany_email}
-            />
+
             <InputLabel>Capacity</InputLabel>
             <TextField
               required
@@ -317,7 +322,7 @@ function ProjectDetails() {
                 variant="contained"
                 color="success"
               >
-                Join
+                Create Project
               </Button>
             </div>
           </div>

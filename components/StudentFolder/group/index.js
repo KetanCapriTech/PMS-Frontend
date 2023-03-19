@@ -10,9 +10,10 @@ function Group() {
     user_Id = localStorage.getItem("email");
   }
 
+  //show all accepted  project
   const fetchDetails = async () => {
     try {
-      const token = localStorage.getItem("token"); // Replace with your actual token
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/student/group`,
         {
@@ -28,8 +29,9 @@ function Group() {
       setUserData(data);
       console.log(data);
       setLeaderEmail(data[0].member1.leaderEmail);
-      // console.log(data[0].member1._id);
+      console.log("sabh sahi hai");
     } catch (error) {
+      console.log("kuch  sahi nahi  hai");
       console.error(error);
     }
   };
@@ -37,10 +39,11 @@ function Group() {
     fetchDetails();
   }, []);
 
+  // delete member
   const handleDelete = async (memberId) => {
     console.log(memberId);
     try {
-      const token = localStorage.getItem("token"); // Replace with your actual token
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/projects/remove/${memberId}`,
         {

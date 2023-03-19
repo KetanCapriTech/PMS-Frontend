@@ -12,8 +12,11 @@ const Requests = () => {
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [showRejectPopup, setShowRejectPopup] = useState(false);
-  const token = localStorage.getItem("token");
-
+  let token;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    token = localStorage.getItem("token");
+  }
   const getAllRequests = async () => {
     setLoading(true);
     try {

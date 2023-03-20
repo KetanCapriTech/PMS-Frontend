@@ -10,16 +10,14 @@ export default function CardAddFaculty() {
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className="font-bold  text-center text-base text-blueGray-700 ">
-                Add Faculty
-              </h3>
+              <div>
+                <AddFacultyForm />
+              </div>
             </div>
           </div>
         </div>
-        {/* content here */}
-        <div>
-          <AddFacultyForm />
-        </div>
+
+
       </div>
     </>
   );

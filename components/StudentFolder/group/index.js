@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
+
 function Group() {
   const [userData, setUserData] = useState([]);
   const [members, setMembers] = useState([]);
   const [leaderEmail, setLeaderEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   let user_Id;
   if (typeof window !== "undefined") {
@@ -65,7 +69,9 @@ function Group() {
   return (
     <>
       {memberArray.length === 0 ? (
-        <p>No data</p>
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
           {memberArray.map((member, index) => {

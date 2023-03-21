@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function ProjectDetails() {
   const [userData, setUserData] = useState([]);
@@ -26,6 +27,7 @@ function ProjectDetails() {
   const [facultyList, setFacultyList] = useState([]);
   const [faucltyID, setFacultyID] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   let token;
   if (typeof window !== "undefined") {
@@ -196,262 +198,270 @@ function ProjectDetails() {
     console.log(faucltyID);
   };
   return (
-    <div>
-      {/* join project modal */}
-      <Modal
-        open={openJoinModal}
-        onClose={handleCloseJoinModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div>
-            <div className="p-4">Enter Invite Code</div>
-            <TextField
-              required
-              id="outlined-required"
-              onChange={handleInviteCode}
-            />
-            <Button onClick={joinProject}>Join</Button>
-          </div>
+    <>
+      {loading ? (
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
         </Box>
-      </Modal>
-      {/* create project modal */}
-      <Modal
-        open={openCreateModal}
-        onClose={handleCloseCreateProModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div className="p-4">
-            <strong>Project Details</strong>
-          </div>
+      ) : (
+        <div>
+          {/* join project modal */}
+          <Modal
+            open={openJoinModal}
+            onClose={handleCloseJoinModal}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <div>
+                <div className="p-4">Enter Invite Code</div>
+                <TextField
+                  required
+                  id="outlined-required"
+                  onChange={handleInviteCode}
+                />
+                <Button onClick={joinProject}>Join</Button>
+              </div>
+            </Box>
+          </Modal>
+          {/* create project modal */}
+          <Modal
+            open={openCreateModal}
+            onClose={handleCloseCreateProModal}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <div className="p-4">
+                <strong>Project Details</strong>
+              </div>
 
-          <div>
-            <TextField
-              required
-              id="outlined-required"
-              placeholder="title"
-              onChange={handletitle}
-            />
+              <div>
+                <TextField
+                  required
+                  id="outlined-required"
+                  placeholder="title"
+                  onChange={handletitle}
+                />
 
-            <div>
-              <InputLabel>Description</InputLabel>
-              <TextField
-                required
-                id="outlined-required"
-                onChange={handledescription}
-              />
-            </div>
-            <InputLabel>Select a faculty:</InputLabel>
+                <div>
+                  <InputLabel>Description</InputLabel>
+                  <TextField
+                    required
+                    id="outlined-required"
+                    onChange={handledescription}
+                  />
+                </div>
+                <InputLabel>Select a faculty:</InputLabel>
 
-            <div>
-              {isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <select id="dropdown" onChange={handleSelect}>
-                  <option value="">--Select Faculty--</option>
-                  {Object.keys(facultyList).map((id) => (
-                    <option key={id} value={facultyList[id].name}>
-                      {facultyList[id].name}
-                    </option>
-                  ))}
+                <div>
+                  {isLoading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <select id="dropdown" onChange={handleSelect}>
+                      <option value="">--Select Faculty--</option>
+                      {Object.keys(facultyList).map((id) => (
+                        <option key={id} value={facultyList[id].name}>
+                          {facultyList[id].name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  {/* {selectedName && <p>Selected name: {selectedName}</p>} */}
+                </div>
+
+                <InputLabel>Project Type</InputLabel>
+                <select onChange={handleproject_type}>
+                  <option value="">Select an option</option>
+                  <option value="IDP (Industry Defined Project)">IDP</option>
+                  <option value="UDP (User Defined Project)">UDP</option>
                 </select>
-              )}
-              {/* {selectedName && <p>Selected name: {selectedName}</p>} */}
-            </div>
-
-            <InputLabel>Project Type</InputLabel>
-            <select onChange={handleproject_type}>
-              <option value="">Select an option</option>
-              <option value="IDP (Industry Defined Project)">IDP</option>
-              <option value="UDP (User Defined Project)">UDP</option>
-            </select>
-            {projectType === "IDP (Industry Defined Project)" && (
-              <>
-                <InputLabel>Company</InputLabel>
-                <TextField
-                  required
-                  id="outlined-required"
-                  onChange={handlecompany}
-                />
-                <InputLabel>Company Email</InputLabel>
-                <TextField
-                  required
-                  id="outlined-required"
-                  onChange={handlecompany_email}
-                />
-              </>
-            )}
-            <InputLabel>Semester </InputLabel>
-            <select onChange={handleSemester}>
-              <option value="">Select an option</option>
-              <option value="6">6th Semester</option>
-              <option value="7">7th Semester</option>
-              <option value="8">8Th Semester</option>
-            </select>
-            <InputLabel>Frontend Technologies</InputLabel>
-            <TextField
-              required
-              id="outlined-required"
-              onChange={handlefrontendTechnologies}
-            />
-            <InputLabel>Backend Technologies</InputLabel>
-            <TextField
-              required
-              id="outlined-required"
-              onChange={handlebackendTechnologies}
-            />
-            <InputLabel>Database</InputLabel>
-            <TextField
-              required
-              id="outlined-required"
-              onChange={handledatabase}
-            />
-
-            <InputLabel>Capacity</InputLabel>
-            <TextField
-              required
-              id="outlined-required"
-              onChange={handlecapacity}
-            />
-            <div className="p-4">
-              <Button
-                onClick={createProject}
-                variant="contained"
-                color="success"
-              >
-                Create Project
-              </Button>
-            </div>
-          </div>
-        </Box>
-      </Modal>
-      <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
-        <h1 className="font-bold text-xl mb-2 pb-2">Project Details</h1>
-        {userData.length === 0 ? (
-          <div>
-            Project not created yet
-            <br></br>
-            <br></br>
-            <div className="p-1">
-              <Button
-                variant="contained"
-                color="success"
-                onClick={handleOpenCreateProModal}
-              >
-                Create Project
-              </Button>
-
-              <Button
-                variant="contained"
-                color="success"
-                onClick={handleOpenJoinModal}
-              >
-                Join Project
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div className="mb-2">
-              <strong>Title : </strong>
-              {userData.projectTitle}
-            </div>
-
-            <div className="mb-2">
-              <strong>Description : </strong>
-              {userData.projectDescription}
-            </div>
-
-            <div className="mb-2">
-              <div className="flex">
-                <strong>Project Log : </strong>
-                {userData.project_isApproved.length === 0 ? (
-                  <div className="mb-2">{userData.project_isApproved}</div>
-                ) : (
-                  <div>No Data</div>
+                {projectType === "IDP (Industry Defined Project)" && (
+                  <>
+                    <InputLabel>Company</InputLabel>
+                    <TextField
+                      required
+                      id="outlined-required"
+                      onChange={handlecompany}
+                    />
+                    <InputLabel>Company Email</InputLabel>
+                    <TextField
+                      required
+                      id="outlined-required"
+                      onChange={handlecompany_email}
+                    />
+                  </>
                 )}
+                <InputLabel>Semester </InputLabel>
+                <select onChange={handleSemester}>
+                  <option value="">Select an option</option>
+                  <option value="6">6th Semester</option>
+                  <option value="7">7th Semester</option>
+                  <option value="8">8Th Semester</option>
+                </select>
+                <InputLabel>Frontend Technologies</InputLabel>
+                <TextField
+                  required
+                  id="outlined-required"
+                  onChange={handlefrontendTechnologies}
+                />
+                <InputLabel>Backend Technologies</InputLabel>
+                <TextField
+                  required
+                  id="outlined-required"
+                  onChange={handlebackendTechnologies}
+                />
+                <InputLabel>Database</InputLabel>
+                <TextField
+                  required
+                  id="outlined-required"
+                  onChange={handledatabase}
+                />
+
+                <InputLabel>Capacity</InputLabel>
+                <TextField
+                  required
+                  id="outlined-required"
+                  onChange={handlecapacity}
+                />
+                <div className="p-4">
+                  <Button
+                    onClick={createProject}
+                    variant="contained"
+                    color="success"
+                  >
+                    Create Project
+                  </Button>
+                </div>
+              </div>
+            </Box>
+          </Modal>
+          <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
+            <h1 className="font-bold text-xl mb-2 pb-2">Project Details</h1>
+            {userData.length === 0 ? (
+              <div>
+                Project not created yet
+                <br></br>
+                <br></br>
+                <div className="p-1">
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={handleOpenCreateProModal}
+                  >
+                    Create Project
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={handleOpenJoinModal}
+                  >
+                    Join Project
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="mb-2">
+                  <strong>Title : </strong>
+                  {userData.projectTitle}
+                </div>
+
+                <div className="mb-2">
+                  <strong>Description : </strong>
+                  {userData.projectDescription}
+                </div>
+
+                <div className="mb-2">
+                  <div className="flex">
+                    <strong>Project Log : </strong>
+                    {userData.project_isApproved.length === 0 ? (
+                      <div className="mb-2">{userData.project_isApproved}</div>
+                    ) : (
+                      <div>No Data</div>
+                    )}
+                  </div>
+                </div>
+                <div className="mb-2">
+                  <strong>Project Status : </strong>
+                  {userData.project_status}
+                </div>
+                <div className="mb-2">
+                  <strong>Total Members : </strong>
+                  {userData.totalMembers}
+                </div>
+                <div className="mb-2">
+                  <strong>Company : </strong>
+                  {userData.project_company}
+                </div>
+                <div className="flex">
+                  <strong>Comments : </strong>
+                  {userData.project_company.length === 0 ? (
+                    <div className="mb-2">{userData.project_comments}</div>
+                  ) : (
+                    <div> No comments yet</div>
+                  )}
+                </div>
+                <div className="mb-2">
+                  <strong>Project Type : </strong>
+                  {userData.project_type}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <br></br>
+          <div className="bg-white rounded-lg shadow-md  flex-grow ">
+            <div className="p-4 ">
+              <div className="font-bold text-xl mb-2">Group Members</div>
+              <div className="text-gray-900 font-semibold mb-2">
+                {userData.groupMembers}
               </div>
             </div>
-            <div className="mb-2">
-              <strong>Project Status : </strong>
-              {userData.project_status}
-            </div>
-            <div className="mb-2">
-              <strong>Total Members : </strong>
-              {userData.totalMembers}
-            </div>
-            <div className="mb-2">
-              <strong>Company : </strong>
-              {userData.project_company}
-            </div>
-            <div className="flex">
-              <strong>Comments : </strong>
-              {userData.project_company.length === 0 ? (
-                <div className="mb-2">{userData.project_comments}</div>
-              ) : (
-                <div> No comments yet</div>
-              )}
-            </div>
-            <div className="mb-2">
-              <strong>Project Type : </strong>
-              {userData.project_type}
-            </div>
           </div>
-        )}
-      </div>
-
-      <br></br>
-      <div className="bg-white rounded-lg shadow-md  flex-grow ">
-        <div className="p-4 ">
-          <div className="font-bold text-xl mb-2">Group Members</div>
-          <div className="text-gray-900 font-semibold mb-2">
-            {userData.groupMembers}
+          <br></br>
+          <br></br>
+          <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
+            <strong className="font-bold text-xl mb-2">Mentor</strong>
+            {userData.length === 0 ? (
+              <div>No mentor assigned</div>
+            ) : (
+              <div>
+                <br />
+                <div className="text-gray-900 font-bold text-xl">
+                  {userData.facultyName}
+                </div>
+                <div className="text-gray-900 font-semibold mb-2">
+                  {userData.facultyEmail}
+                </div>
+                <div className="text-gray-900 font-semibold mb-2">
+                  {userData.facultyPhone}
+                </div>
+              </div>
+            )}
+          </div>
+          <br></br>
+          <br></br>
+          <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
+            <strong className="font-bold text-xl mb-2">Leader</strong>
+            {userData.length === 0 ? (
+              <div>No Data </div>
+            ) : (
+              <div>
+                <br />
+                <div className="text-gray-900 font-bold text-xl">
+                  {userData.leaderName}
+                </div>
+                <div className="text-gray-900 font-semibold mb-2">
+                  {userData.leaderEmail}
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-      <br></br>
-      <br></br>
-      <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
-        <strong className="font-bold text-xl mb-2">Mentor</strong>
-        {userData.length === 0 ? (
-          <div>No mentor assigned</div>
-        ) : (
-          <div>
-            <br />
-            <div className="text-gray-900 font-bold text-xl">
-              {userData.facultyName}
-            </div>
-            <div className="text-gray-900 font-semibold mb-2">
-              {userData.facultyEmail}
-            </div>
-            <div className="text-gray-900 font-semibold mb-2">
-              {userData.facultyPhone}
-            </div>
-          </div>
-        )}
-      </div>
-      <br></br>
-      <br></br>
-      <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
-        <strong className="font-bold text-xl mb-2">Leader</strong>
-        {userData.length === 0 ? (
-          <div>No Data </div>
-        ) : (
-          <div>
-            <br />
-            <div className="text-gray-900 font-bold text-xl">
-              {userData.leaderName}
-            </div>
-            <div className="text-gray-900 font-semibold mb-2">
-              {userData.leaderEmail}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

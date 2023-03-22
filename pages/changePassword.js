@@ -10,20 +10,21 @@ function ChangePassword() {
   const changePassword = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/change-password",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/change-password`,
         {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             email: email,
             password: oldPassword,
             newPassword: newPassword,
           }),
-          headers: {
-            "Content-Type": "application/json",
-          },
         }
       );
       if (!response.ok) {
+        console.log(email, oldPassword, newPassword);
         throw new Error("Error changing password");
       }
       const responseData = await response.json();

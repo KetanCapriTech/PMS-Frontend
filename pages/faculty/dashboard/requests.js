@@ -1,16 +1,16 @@
 import React from "react";
 import DashboardView from "layouts/DashboardView.js";
-import CardProjectApproved from "components/Cards/CardFaculty/CardProjectToApprove";
+import Cardrequests from "components/Cards/CardFaculty/Cardrequests";
 
-export default function ProjectToApprove() {
+export default function requests() {
   return (
     <>
       <div className="flex flex-wrap"></div>
       <div className="flex flex-wrap mt-4">
-        <CardProjectApproved />
+        <Cardrequests />
       </div>
     </>
   );
 }
 
-ProjectToApprove.layout = DashboardView;
+requests.layout = DashboardView;

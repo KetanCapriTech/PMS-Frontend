@@ -1,22 +1,21 @@
-import Request from "components/StudentFolder/request";
 import React from "react";
-
+import Requests from "components/Facultyfolder/requests";
 // components
 
-export default function CardRequest() {
+export default function Cardrequests() {
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full p-8 shadow-lg rounded">
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className="font-bold text-base text-center">Request</h3>
+              <h3 className="font-bold text-base text-center ">Requests</h3>
             </div>
           </div>
         </div>
         {/* content here */}
         <div>
-          <Request />
+          <Requests />
         </div>
       </div>
     </>

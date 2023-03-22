@@ -13,11 +13,20 @@ function StudentProfile() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [open, setOpen] = React.useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [department, setDepartment] = useState("");
+  const [enrollment, setEnrollment] = useState("");
+  const [isUpdateProfile, setIsUpdateProfile] = useState(false);
+  const [openProfile, setOpenProfile] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
     setIsUpdatePasswordShown(true);
   };
   const handleClose = () => setOpen(false);
+
+  const handleProfileEditClose = () => setOpenProfile(false);
   const router = useRouter();
 
   const handleOldPasswordChange = (event) => {
@@ -32,10 +41,23 @@ function StudentProfile() {
     setConfirmPassword(event.target.value);
   };
 
+  const handleName = (event) => {
+    setName(event.target.value);
+  };
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+  const handleDepartment = (event) => {
+    setDepartment(event.target.value);
+  };
+  const handleEnrollment = (event) => {
+    setEnrollment(event.target.value);
+  };
+
   const changePassword = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/change-password",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/change-password`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -67,7 +89,7 @@ function StudentProfile() {
       setLoading(true);
       try {
         const response = await fetch(
-          "http://localhost:5000/api/users/profile",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/student/profile`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -82,7 +104,6 @@ function StudentProfile() {
         setLoading(false);
       }
     };
-
     fetchUserData();
   }, []);
 
@@ -96,8 +117,7 @@ function StudentProfile() {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
-  };
-
+  }
   return (
     <div className="max-w-md mx-auto mt-4">
       {loading ? (
@@ -126,57 +146,36 @@ function StudentProfile() {
                 <div className="bg-gray-400 rounded-lg shadow-md p-4">
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">Name : </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user.name}
-                      </label>
-                    )}
+
+                    <label className="text-red-500 font-bold">
+                      {userData.name}
+                    </label>
                   </div>
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">Email : </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user.email}
-                      </label>
-                    )}
+
+                    <label className="text-red-500 font-bold">
+                      {userData.email}
+                    </label>
                   </div>
-                  <div className="mb-4">
-                    <label className="text-gray-600 font-bold">Role : </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user.role}
-                      </label>
-                    )}
-                  </div>
+
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">
-                      Department :{" "}
+                      Department :
                     </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user.department}
-                      </label>
-                    )}
+
+                    <label className="text-red-500 font-bold">
+                      {userData.department}
+                    </label>
                   </div>
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">
                       Enrollment Number :
                     </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user.enrollment_number}
-                      </label>
-                    )}
-                  </div>
-                  <div className="mb-4">
-                    <label className="text-gray-600 font-bold">
-                      Student Id :{" "}
+
+                    <label className="text-red-500 font-bold">
+                      {userData.enrollment_number}
                     </label>
-                    {userData.user && (
-                      <label className="text-red-500 font-bold">
-                        {userData.user._id}
-                      </label>
-                    )}
                   </div>
                 </div>
                 <div className="mb-2 text-blueGray-600 mt-10">
@@ -254,6 +253,83 @@ function StudentProfile() {
                           >
                             Submit
                           </button>
+                        </div>
+                      </div>
+                    )}
+                  </Box>
+                </Modal>
+                <Modal
+                  open={openProfile}
+                  onClose={handleProfileEditClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    {isUpdateProfile && (
+                      <div className="mt-4">
+                        <div className="mb-4">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="name-input"
+                          >
+                            Name
+                          </label>
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="name-input"
+                            type="text"
+                            placeholder="Your name"
+                            value={name}
+                            onChange={handleName}
+                          />
+                        </div>
+                        <div className="mb-4">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="email-input"
+                          >
+                            Email
+                          </label>
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="email-input"
+                            type="email"
+                            placeholder="Your Email"
+                            value={email}
+                            onChange={handleEmail}
+                          />
+                        </div>
+                        <div className="mb-6">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="department-input"
+                          >
+                            Department
+                          </label>
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="department-input"
+                            type="text"
+                            placeholder="Department"
+                            value={department}
+                            onChange={handleDepartment}
+                          />
+                        </div>
+                        <div className="mb-6">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="enrollment-input"
+                          >
+                            Enrollment number
+                          </label>
+                          <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="enrollment-input"
+                            type="text"
+                            placeholder="Enrollment"
+                            value={enrollment}
+                            onChange={handleEnrollment}
+                          />
                         </div>
                       </div>
                     )}

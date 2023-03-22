@@ -1,16 +1,16 @@
 import React from "react";
 import DashboardView from "layouts/DashboardView.js";
-import CardAllocatedProjects from "components/Cards/CardFaculty/CardAssignedProject";
+import CardDashboard from "components/Cards/CardFaculty/CardDashboard";
 
-export default function AllocatedProject() {
+export default function Dashboard() {
   return (
     <>
       <div className="flex flex-wrap"></div>
       <div className="flex flex-wrap mt-4">
-        <CardAllocatedProjects />
+        <CardDashboard />
       </div>
     </>
   );
 }
 
-AllocatedProject.layout = DashboardView;
+Dashboard.layout = DashboardView;

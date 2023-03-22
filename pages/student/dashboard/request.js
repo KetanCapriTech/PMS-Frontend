@@ -1,6 +1,6 @@
 import React from "react";
 import DashboardView from "layouts/DashboardView.js";
-import CardRequest from "components/Cards/CardStudent/CardRequest";
+import CardRequest from "components/Cards/CardStudent/CardGroup";
 
 export default function Request() {
   return (

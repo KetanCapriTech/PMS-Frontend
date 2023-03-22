@@ -3,7 +3,11 @@ import React, { useState } from "react";
 function StudentCsv() {
   const [csvData, setCsvData] = useState([]);
   const [responseData, setResponseData] = useState([]);
-  const bearerToken = localStorage.getItem("token");
+  let bearerToken;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    bearerToken = localStorage.getItem("token");
+  }
 
   const handleOnDrop = async (event) => {
     const file = event.target.files[0];
@@ -12,7 +16,7 @@ function StudentCsv() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/users/add-students",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/add-students`,
         {
           method: "POST",
           body: formData,

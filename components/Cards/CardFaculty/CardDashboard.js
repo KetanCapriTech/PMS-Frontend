@@ -1,9 +1,9 @@
+import Dashboard from "components/Facultyfolder/dashboard";
 import React from "react";
-import AssignedProject from "components/Facultyfolder/AssignedProject";
 
 // components
 
-export default function CardAssignedProject() {
+export default function CardDashboard() {
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full p-8 shadow-lg rounded">
@@ -18,7 +18,7 @@ export default function CardAssignedProject() {
         </div>
         {/* content here */}
         <div>
-          <AssignedProject />
+          <Dashboard />
         </div>
       </div>
     </>

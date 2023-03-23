@@ -14,7 +14,7 @@ function Profile() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [open, setOpen] = React.useState(false);
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+
   const [department, setDepartment] = useState("");
   const [designation, setDesignation] = useState("");
   const [maxProjects, setMaxProjects] = useState("");
@@ -50,9 +50,6 @@ function Profile() {
 
   const handleName = (event) => {
     setName(event.target.value);
-  };
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
   };
 
   const handleDepartment = (event) => {
@@ -130,7 +127,6 @@ function Profile() {
           method: "PUT",
           body: JSON.stringify({
             name: name,
-            email: email,
             department: department,
             designation: designation,
             maxProjects: maxProjects,
@@ -382,22 +378,7 @@ function Profile() {
                             onChange={handleName}
                           />
                         </div>
-                        <div className="mb-4">
-                          <label
-                            className="block text-gray-700 font-bold mb-2"
-                            htmlFor="email-input"
-                          >
-                            Email address
-                          </label>
-                          <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="email-input"
-                            type="email"
-                            placeholder="Your Email"
-                            value={email}
-                            onChange={handleEmail}
-                          />
-                        </div>
+
                         <div className="mb-6">
                           <label
                             className="block text-gray-700 font-bold mb-2"

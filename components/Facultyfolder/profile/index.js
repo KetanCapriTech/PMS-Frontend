@@ -255,7 +255,7 @@ function Profile() {
                 </div>
                 <div className="mb-2 text-blueGray-600 mt-10">
                   <i className=" mr-2 text-lg text-blueGray-400"></i>
-                  Solution Manager - Pavan & Nisarg
+                  Solution Manager - Nisarg & Team
                 </div>
                 <div className="mb-2 text-blueGray-600">
                   <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>

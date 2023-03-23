@@ -244,12 +244,20 @@ export default function Groups() {
                     <p className="text-gray-500 text-md mb-4">
                       Semester : {selectedGroup.semester}
                     </p>
-                    <p className="text-gray-500 text-md mb-4">
-                      Company : {selectedGroup.company}
-                    </p>
-                    <p className="text-gray-500 text-md mb-4">
-                      Company Email : {selectedGroup.company_email}
-                    </p>
+                    {selectedGroup.project_type ===
+                    "UDP (User Defined Project)" ? (
+                      <></>
+                    ) : (
+                      <>
+                        <p className="text-gray-500 text-md mb-4">
+                          Company : {selectedGroup.company}
+                        </p>
+                        <p className="text-gray-500 text-md mb-4">
+                          Company Email : {selectedGroup.company_email}
+                        </p>
+                      </>
+                    )}
+
                     <p className="text-gray-500 text-md mb-4">
                       Project Status :
                       <p className="text-red-500">{selectedGroup.status}</p>

@@ -38,6 +38,7 @@ const Login = () => {
         router.push("/changePassword");
       } else if (response.ok) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("projectIsAssigned", null);
         localStorage.setItem("role", data.role);
         roleBasedLogin(data.role);
         localStorage.setItem("email", data.email);

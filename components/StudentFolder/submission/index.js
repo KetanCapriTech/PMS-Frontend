@@ -19,7 +19,7 @@ function index() {
   const getSubmission = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/submission`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/submit/submission`,
         {
           method: "GET",
           headers: {
@@ -29,7 +29,7 @@ function index() {
         }
       );
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
       setSubmission(data);
     } catch (error) {
       console.error(error);
@@ -39,9 +39,9 @@ function index() {
   const submitProject = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/submission`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/submit/submission`,
         {
-          method: "POST",
+          method: "PUT",
           body: JSON.stringify({
             repository_link: repositorylink,
             presentation_link: presentationlink,
@@ -125,11 +125,11 @@ function index() {
           >
             Repository Link:
           </label>
-          <Input
+          <input
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
             id="repository-link"
             type="text"
-            placeholder="Enter repository link"
+            placeholder={submission.repository_link}
             onChange={(e) => setRepositorylink(e.target.value)}
             required
           />
@@ -145,7 +145,7 @@ function index() {
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="presentation-link"
             type="text"
-            placeholder="Enter presentation link"
+            placeholder={submission.presentation_link}
             onChange={(e) => setPresentationlink(e.target.value)}
             required
           />
@@ -161,7 +161,7 @@ function index() {
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="report-link"
             type="text"
-            placeholder="Enter report link"
+            placeholder={submission.report_link}
             onChange={(e) => setReportlink(e.target.value)}
             required
           />

@@ -28,6 +28,7 @@ function ProjectDetails() {
   const [faucltyID, setFacultyID] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [isProjectAssigned, setIsProjectAssigned] = useState(false);
 
   let token;
   if (typeof window !== "undefined") {
@@ -71,6 +72,7 @@ function ProjectDetails() {
     };
     fetchFacultyID();
   }, []);
+
   //project details
   const fetchDetails = async () => {
     try {
@@ -85,10 +87,18 @@ function ProjectDetails() {
         }
       );
       const data = await response.json();
-      console.log(data);
-      setUserData(data);
-      // console.log(facultyID);
-      setUserData(data);
+      // console.log(data);
+      if (data.msg === "You do not have any projects") {
+        setIsProjectAssigned(false);
+        console.log(data.msg);
+        localStorage.setItem("projectIsAssigned", "no");
+      } else {
+        setUserData(data);
+        setIsProjectAssigned(true);
+        console.log(data);
+        localStorage.setItem("projectIsAssigned", "yes");
+        // window.location.reload();
+      }
     } catch (error) {
       console.error(error);
     }
@@ -338,7 +348,7 @@ function ProjectDetails() {
           </Modal>
           <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
             <h1 className="font-bold text-xl mb-2 pb-2">Project Details</h1>
-            {userData.length === 0 ? (
+            {isProjectAssigned === false ? (
               <div>
                 Project not created yet
                 <br></br>
@@ -376,7 +386,7 @@ function ProjectDetails() {
                 <div className="mb-2">
                   <div className="flex">
                     <strong>Project Log : </strong>
-                    {userData.project_isApproved.length === 0 ? (
+                    {userData.length === 0 ? (
                       <div className="mb-2">{userData.project_isApproved}</div>
                     ) : (
                       <div>No Data</div>
@@ -391,13 +401,17 @@ function ProjectDetails() {
                   <strong>Total Members : </strong>
                   {userData.totalMembers}
                 </div>
-                <div className="mb-2">
+                <div className="flex">
                   <strong>Company : </strong>
-                  {userData.project_company}
+                  {userData.project_company === "" ? (
+                    <div className="mb-2">No Company</div>
+                  ) : (
+                    <div>{userData.project_company}</div>
+                  )}
                 </div>
                 <div className="flex">
                   <strong>Comments : </strong>
-                  {userData.project_company.length === 0 ? (
+                  {userData.length === 0 ? (
                     <div className="mb-2">{userData.project_comments}</div>
                   ) : (
                     <div> No comments yet</div>
@@ -412,53 +426,67 @@ function ProjectDetails() {
           </div>
 
           <br></br>
-          <div className="bg-white rounded-lg shadow-md  flex-grow ">
-            <div className="p-4 ">
-              <div className="font-bold text-xl mb-2">Group Members</div>
-              <div className="text-gray-900 font-semibold mb-2">
-                {userData.groupMembers}
+          {isProjectAssigned === false ? (
+            <></>
+          ) : (
+            <div className="bg-white rounded-lg shadow-md  flex-grow ">
+              <div className="p-4 ">
+                <div className="font-bold text-xl mb-2">Group Members</div>
+                <div className="text-gray-900 font-semibold mb-2">
+                  {userData.groupMembers}
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
           <br></br>
           <br></br>
-          <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
-            <strong className="font-bold text-xl mb-2">Mentor</strong>
-            {userData.length === 0 ? (
-              <div>No mentor assigned</div>
-            ) : (
-              <div>
-                <br />
-                <div className="text-gray-900 font-bold text-xl">
-                  {userData.facultyName}
+          {isProjectAssigned === false ? (
+            <></>
+          ) : (
+            <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
+              <strong className="font-bold text-xl mb-2">Mentor</strong>
+              {userData.length === 0 ? (
+                <div>No mentor assigned</div>
+              ) : (
+                <div>
+                  <br />
+                  <div className="text-gray-900 font-bold text-xl">
+                    {userData.facultyName}
+                  </div>
+                  <div className="text-gray-900 font-semibold mb-2">
+                    {userData.facultyEmail}
+                  </div>
+                  <div className="text-gray-900 font-semibold mb-2">
+                    {userData.facultyPhone}
+                  </div>
                 </div>
-                <div className="text-gray-900 font-semibold mb-2">
-                  {userData.facultyEmail}
-                </div>
-                <div className="text-gray-900 font-semibold mb-2">
-                  {userData.facultyPhone}
-                </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
+
           <br></br>
           <br></br>
-          <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
-            <strong className="font-bold text-xl mb-2">Leader</strong>
-            {userData.length === 0 ? (
-              <div>No Data </div>
-            ) : (
-              <div>
-                <br />
-                <div className="text-gray-900 font-bold text-xl">
-                  {userData.leaderName}
+          {isProjectAssigned === false ? (
+            <></>
+          ) : (
+            <div className="bg-white rounded-lg shadow-md  p-4 flex-grow ">
+              <strong className="font-bold text-xl mb-2">Leader</strong>
+              {userData.length === 0 ? (
+                <div>No Data </div>
+              ) : (
+                <div>
+                  <br />
+                  <div className="text-gray-900 font-bold text-xl">
+                    {userData.leaderName}
+                  </div>
+                  <div className="text-gray-900 font-semibold mb-2">
+                    {userData.leaderEmail}
+                  </div>
                 </div>
-                <div className="text-gray-900 font-semibold mb-2">
-                  {userData.leaderEmail}
-                </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </>

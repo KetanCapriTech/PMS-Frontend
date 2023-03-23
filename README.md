@@ -5,7 +5,7 @@
 yarn install
 (note :- yarn -v 1.22.19 node -v v16.16.0)
 
-npm run dev
+yarn run dev
 
 ## Files and Folder
 

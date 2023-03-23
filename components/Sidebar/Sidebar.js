@@ -489,13 +489,13 @@ export default function Sidebar() {
                   </Link>
                 </li>
                 <li className="items-center">
-                  <Link href="/student/dashboard/review">
+                  <Link href="/student/dashboard/submission">
                     <a
                       href="#pablo"
                       className={
                         "text-xs uppercase py-3 font-bold block " +
                         (router.pathname.indexOf(
-                          "/student/dashboard/review"
+                          "/student/dashboard/submission"
                         ) !== -1
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
@@ -505,7 +505,7 @@ export default function Sidebar() {
                         className={
                           "fas fa-tv mr-2 text-sm " +
                           (router.pathname.indexOf(
-                            "/student/dashboard/review"
+                            "/student/dashboard/submission"
                           ) !== -1
                             ? "opacity-75"
                             : "text-blueGray-300")

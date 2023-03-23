@@ -342,34 +342,32 @@ export default function Groups() {
                       </div>
                     </div>
 
-                    {selectedGroup.leader.name === studentTable.email && (
-                      <table className="table-auto w-full">
-                        <thead>
-                          <tr>
-                            <th className="px-4 py-2">Name</th>
-                            <th className="px-4 py-2">Email</th>
-                            <th className="px-4 py-2">Action</th>
+                    {/* {selectedGroup.leader.name === studentTable.email && ( */}
+                    <table className="table-auto w-full">
+                      <thead>
+                        <tr>
+                          <th className="px-4 py-2">Name</th>
+                          <th className="px-4 py-2">Email</th>
+                          <th className="px-4 py-2">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {studentTable.map((student) => (
+                          <tr key={student.id}>
+                            <td className="border px-4 py-2">{student.name}</td>
+                            <td className="border px-4 py-2">
+                              {student.email}
+                            </td>
+                            <td className="border px-4 py-2">
+                              <button className="bg-gray-500  text-black font-bold py-2 px-4 rounded">
+                                Delete
+                              </button>
+                            </td>
                           </tr>
-                        </thead>
-                        <tbody>
-                          {studentTable.map((student) => (
-                            <tr key={student.id}>
-                              <td className="border px-4 py-2">
-                                {student.name}
-                              </td>
-                              <td className="border px-4 py-2">
-                                {student.email}
-                              </td>
-                              <td className="border px-4 py-2">
-                                <button className="bg-gray-500  text-black font-bold py-2 px-4 rounded">
-                                  Delete
-                                </button>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    )}
+                        ))}
+                      </tbody>
+                    </table>
+                    {/* )} */}
                     <div className="bg-white rounded-lg shadow-xl ">
                       <label
                         htmlFor="message"

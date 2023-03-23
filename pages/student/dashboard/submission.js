@@ -1,16 +1,16 @@
 import React from "react";
 import DashboardView from "layouts/DashboardView.js";
-import CardReview from "components/Cards/CardStudent/CardReview";
+import CardSubmission from "components/Cards/CardStudent/CardSubmission";
 
-export default function Review() {
+export default function Submission() {
   return (
     <>
       <div className="flex flex-wrap"></div>
       <div className="flex flex-wrap mt-4">
-        <CardReview />
+        <CardSubmission />
       </div>
     </>
   );
 }
 
-Review.layout = DashboardView;
+Submission.layout = DashboardView;

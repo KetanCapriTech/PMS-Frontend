@@ -328,12 +328,20 @@ function ProjectDetails() {
                   onChange={handledatabase}
                 />
 
-                <InputLabel>Capacity</InputLabel>
-                <TextField
-                  required
-                  id="outlined-required"
+                <label htmlFor="capacity">Capacity</label>
+                <select
+                  id="capacity"
+                  name="capacity"
                   onChange={handlecapacity}
-                />
+                  required
+                >
+                  <option value="">Select capacity</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+
                 <div className="p-4">
                   <Button
                     onClick={createProject}

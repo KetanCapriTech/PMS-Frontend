@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { useRouter } from "next/router";
+import { Button } from "@mui/material";
 export default function Index() {
   const router = useRouter();
   const handleLogin = () => {
@@ -10,7 +11,7 @@ export default function Index() {
     <>
       <div>
         Welcome
-        <button onClick={handleLogin}>Login</button>
+        <Button onClick={handleLogin}>Login</Button>
       </div>
     </>
   );

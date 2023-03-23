@@ -1,13 +1,22 @@
-import { Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
-import Box from "@mui/material/Box";
 
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
- 
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 function AddStudentForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -40,9 +49,8 @@ function AddStudentForm() {
       );
       const data = await response.json();
       console.log(data);
-      
+
       if (response.ok) {
-      
         toast.success(response.json.message, {
           position: "top-right",
           autoClose: 1000,
@@ -63,17 +71,15 @@ function AddStudentForm() {
           progress: undefined,
         });
       }
-       
+
       // Display the updated data to the UI
       // ...
-
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-
     <div>
       <ToastContainer
         position="top-right"
@@ -88,12 +94,10 @@ function AddStudentForm() {
       />
       {/* Same as */}
       <ToastContainer />
-      <Container component="main" maxWidth="xs" className='contain2'>
-
+      <Container component="main" maxWidth="xs" className="contain2">
         <CssBaseline />
         <Box
           sx={{
-            
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -113,7 +117,7 @@ function AddStudentForm() {
             onSubmit={handleSubmit}
           >
             <TextField
-              margin='normal'
+              margin="normal"
               required
               fullWidth
               id="name"
@@ -122,7 +126,6 @@ function AddStudentForm() {
               value={name}
               autoFocus
               onChange={(event) => setName(event.target.value)}
-
             />
             <TextField
               margin="normal"
@@ -173,12 +176,9 @@ function AddStudentForm() {
             >
               Add Student
             </Button>
-
           </Box>
         </Box>
-
       </Container>
-
     </div>
   );
 }

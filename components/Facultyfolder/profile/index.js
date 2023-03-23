@@ -141,7 +141,7 @@ function Profile() {
 
       if (response.ok) {
         const responseData = await response.json();
-        router.push("/login");
+        setOpenProfile(false);
         return responseData;
       }
       if (!response.ok) {
@@ -237,26 +237,6 @@ function Profile() {
                       <label className="text-red-500 font-bold">
                         {userData.maxProjects}
                       </label>
-                    )}
-                  </div>
-                  <div className="mb-4">
-                    <label className="text-gray-600 font-bold p-2">
-                      Set Max Projects :
-                    </label>
-                    {userData && (
-                      <select
-                        className="border border-gray-400 rounded px-3 py-2 p-2"
-                        value={userData.maxProjects}
-                        style={{ width: "5%" }}
-                        onChange={(e) => {
-                          // handle change event
-                        }}
-                      >
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                        {/* add more options as needed */}
-                      </select>
                     )}
                   </div>
 
@@ -373,7 +353,7 @@ function Profile() {
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="name-input"
                             type="text"
-                            placeholder="Your name"
+                            placeholder={userData.name}
                             value={name}
                             onChange={handleName}
                           />
@@ -390,7 +370,7 @@ function Profile() {
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="department-input"
                             type="text"
-                            placeholder="Department"
+                            placeholder={userData.designation}
                             value={designation}
                             onChange={handleDesignation}
                           />
@@ -406,7 +386,7 @@ function Profile() {
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="department-input"
                             type="text"
-                            placeholder="Department"
+                            placeholder={userData.department}
                             value={department}
                             onChange={handleDepartment}
                           />
@@ -422,7 +402,7 @@ function Profile() {
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="department-input"
                             type="text"
-                            placeholder="Department"
+                            placeholder={userData.maxProjects}
                             value={maxProjects}
                             onChange={handleMaxProjects}
                           />
@@ -438,7 +418,7 @@ function Profile() {
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="department-input"
                             type="text"
-                            placeholder="Department"
+                            placeholder={userData.phoneNumber}
                             value={phoneNumber}
                             onChange={handlePhoneNumber}
                           />

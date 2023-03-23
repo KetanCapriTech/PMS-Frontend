@@ -47,34 +47,36 @@ function FacultyCsv() {
         </Box>
       ) : (
         <div>
-          <div class="flex w-full  items-center justify-center bg-grey-lighter">
-            <label class="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
+          <div className="flex w-full  items-center justify-center bg-grey-lighter">
+            <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
               <svg
-                class="w-8 h-8"
+                className="w-8 h-8"
                 fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
                 <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
               </svg>
-              <span class="mt-2 text-base leading-normal">Select a file</span>
+              <span className="mt-2 text-base leading-normal">
+                Select a file
+              </span>
               <input
                 type="file"
                 accept=".csv"
-                class="hidden"
+                className="hidden"
                 onChange={handleOnDrop}
               />
             </label>
           </div>
 
-          <table class="w-full border-collapse border border-gray-400">
+          <table className="w-full border-collapse border border-gray-400">
             <tbody>
               {csvData.map((row, index) => (
-                <tr key={index} class="bg-white border border-gray-400">
-                  <td class="p-3">{row[0]}</td>
-                  <td class="p-3">{row[1]}</td>
-                  <td class="p-3">{row[2]}</td>
-                  <td class="p-3">{row[3]}</td>
+                <tr key={index} className="bg-white border border-gray-400">
+                  <td className="p-3">{row[0]}</td>
+                  <td className="p-3">{row[1]}</td>
+                  <td className="p-3">{row[2]}</td>
+                  <td className="p-3">{row[3]}</td>
                 </tr>
               ))}
             </tbody>
@@ -86,22 +88,22 @@ function FacultyCsv() {
                 Data received from the server:
               </h3>
 
-              <table class="w-full border-collapse border border-gray-400">
+              <table className="w-full border-collapse border border-gray-400">
                 <thead>
-                  <tr class="bg-gray-200 border border-gray-400">
-                    <th class="p-3 text-left">Name</th>
-                    <th class="p-3 text-left">Email</th>
-                    <th class="p-3 text-left">Department</th>
-                    <th class="p-3 text-left">Phone Number</th>
+                  <tr className="bg-gray-200 border border-gray-400">
+                    <th className="p-3 text-left">Name</th>
+                    <th className="p-3 text-left">Email</th>
+                    <th className="p-3 text-left">Department</th>
+                    <th className="p-3 text-left">Phone Number</th>
                   </tr>
                 </thead>
                 <tbody>
                   {responseData.map((row, index) => (
-                    <tr key={index} class="bg-white border border-gray-400">
-                      <td class="p-3">{row.name}</td>
-                      <td class="p-3">{row.email}</td>
-                      <td class="p-3">{row.department}</td>
-                      <td class="p-3">{row.phoneNumber}</td>
+                    <tr key={index} className="bg-white border border-gray-400">
+                      <td className="p-3">{row.name}</td>
+                      <td className="p-3">{row.email}</td>
+                      <td className="p-3">{row.department}</td>
+                      <td className="p-3">{row.phoneNumber}</td>
                     </tr>
                   ))}
                 </tbody>

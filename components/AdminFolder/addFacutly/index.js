@@ -1,12 +1,18 @@
-import { Avatar, Box, Button, Container, CssBaseline, TextField, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
-import Box from "@mui/material/Box";
-
 
 import { toast, ToastContainer } from "react-toastify";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import 'react-toastify/dist/ReactToastify.css';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import "react-toastify/dist/ReactToastify.css";
 function AddFacultyForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -128,83 +134,81 @@ function AddFacultyForm() {
     //   </button>
     // </div>
     <div>
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-    />
-    {/* Same as */}
-    <ToastContainer />
-    <Container component="main" maxWidth="xs" className='contain2'>
-
-      <CssBaseline />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <AccountCircleIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Add Faculty
-        </Typography>
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      {/* Same as */}
+      <ToastContainer />
+      <Container component="main" maxWidth="xs" className="contain2">
+        <CssBaseline />
         <Box
-          component="form"
-          noValidate
-          sx={{ mt: 1 }}
-          onSubmit={handleSubmit}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            id="name"
-            label="Name"
-            name="name"
-            autoFocus
-            onChange={(event) => setName(event.target.value)}
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <AccountCircleIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Add Faculty
+          </Typography>
 
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            label="Email"
-            name="email"
-            autoFocus
-            onChange={(event) => setEmail(event.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="department"
-            label="Department"
-            name="department"
-            autoFocus
-            onChange={(event) => setDepartment(event.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="phone"
-            label="Phone Number"
-            name="phone"
-            autoFocus
-            onChange={(event) => setPhone(event.target.value)}
-          />
-          {/* <TextField
+          <Box
+            component="form"
+            noValidate
+            sx={{ mt: 1 }}
+            onSubmit={handleSubmit}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoFocus
+              onChange={(event) => setName(event.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="Email"
+              name="email"
+              autoFocus
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="department"
+              label="Department"
+              name="department"
+              autoFocus
+              onChange={(event) => setDepartment(event.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="phone"
+              label="Phone Number"
+              name="phone"
+              autoFocus
+              onChange={(event) => setPhone(event.target.value)}
+            />
+            {/* <TextField
                           margin="normal"
                           required
                           fullWidth
@@ -213,21 +217,18 @@ function AddFacultyForm() {
                           name="password"
                           autoFocus  
                       /> */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Add Faculty
-          </Button>
-
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Add Faculty
+            </Button>
+          </Box>
         </Box>
-      </Box>
-
-    </Container>
-
-  </div>
+      </Container>
+    </div>
   );
 }
 

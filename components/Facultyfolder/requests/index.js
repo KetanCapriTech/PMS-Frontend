@@ -219,7 +219,6 @@ const Requests = () => {
         </div>
       )}
       <div>
-        <Button onClick={handleOpen}>Open modal</Button>
         <Modal
           open={open}
           onClose={handleClose}

@@ -399,20 +399,6 @@ export default function Groups() {
                         </>
                       </div>
                     </div>
-
-                    <div className="flex p-2">
-                      <div className="p-4">
-                        <>
-                          <Button
-                            variant="contained"
-                            color="error"
-                            onClick={() => deleteMember(selectedGroup._id)}
-                          >
-                            Delete Member
-                          </Button>
-                        </>
-                      </div>
-                    </div>
                   </>
                 )}
               </Box>

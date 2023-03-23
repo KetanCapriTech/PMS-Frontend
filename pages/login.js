@@ -1,10 +1,24 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-import { Avatar, Box, Button, Container, CssBaseline, FormControl, Grid, InputLabel, Link, MenuItem, Select, TextField, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  FormControl,
+  Grid,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -36,7 +50,6 @@ const Login = () => {
       );
       const data = await response.json();
       console.log(data);
-      
 
       if (
         data.message ===
@@ -51,22 +64,17 @@ const Login = () => {
         localStorage.setItem("email", data.email);
         localStorage.setItem("id", data.userId);
         localStorage.setItem("hhjklmno-hjsohjso-toKeN", "login success");
-        
-          toast.success("Login Done", {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-  
-       
-         
-  
+
+        toast.success("Login Done", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       } else {
-       
         toast.error("incorrect id password ", {
           position: "top-right",
           autoClose: 1000,
@@ -76,7 +84,6 @@ const Login = () => {
           draggable: true,
           progress: undefined,
         });
-      
       }
     } catch (error) {
       console.error(error);
@@ -85,7 +92,7 @@ const Login = () => {
 
   return (
     <div>
-  <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -98,8 +105,7 @@ const Login = () => {
       />
       {/* Same as */}
       <ToastContainer />
-      <Container component="main" maxWidth="xs" className='contain3'>
-
+      <Container component="main" maxWidth="xs" className="contain3">
         <CssBaseline />
         <Box
           sx={{
@@ -108,7 +114,6 @@ const Login = () => {
             flexDirection: "column",
             alignItems: "center",
           }}
-
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
@@ -123,22 +128,22 @@ const Login = () => {
             noValidate
             sx={{ mt: 1 }}
           >
-
-
             <TextField
               margin="normal"
               required
               fullWidth
               label="email"
+              type="email"
               name="email"
-              autoFocus 
-             value={email}
+              autoFocus
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
               required
               fullWidth
+              type="password"
               id="password"
               label="password"
               name="password"
@@ -148,7 +153,6 @@ const Login = () => {
             />
 
             <Button
-
               type="submit"
               fullWidth
               variant="contained"
@@ -159,14 +163,10 @@ const Login = () => {
 
             <Grid container>
               <Grid item xs>
-                <Link to="#">
-                  Forgot password?
-                </Link>
+                <Link to="#">Forgot password?</Link>
               </Grid>
               <Grid item>
-                <Link to="/login">
-                  {"Already have an account? Sign in"}
-                </Link>
+                <Link to="/login">{"Already have an account? Sign in"}</Link>
               </Grid>
             </Grid>
           </Box>

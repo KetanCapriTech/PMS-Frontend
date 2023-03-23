@@ -158,7 +158,7 @@ function StudentProject() {
                     <strong>Invite Code : </strong>
                     {userData.invite_code}
                   </div>
-                )}{" "}
+                )}
                 {user_Id === leaderEmail && (
                   <Button variant="outlined" onClick={handleClickOpen}>
                     Update Project
@@ -188,6 +188,7 @@ function StudentProject() {
                             type="text"
                             id="title"
                             name="title"
+                            placeholder={userData.title}
                             required
                             className="w-full px-3 py-2 border rounded-md"
                           />
@@ -203,6 +204,7 @@ function StudentProject() {
                             type="text"
                             id="description"
                             name="description"
+                            placeholder={userData.description}
                             required
                             className="w-full px-3 py-2 border rounded-md"
                           ></input>
@@ -239,6 +241,7 @@ function StudentProject() {
                             type="text"
                             id="repositoryLink"
                             name="repositoryLink"
+                            placeholder={userData.repository_link}
                             required
                             className="w-full px-3 py-2 border rounded-md"
                           />
@@ -256,6 +259,7 @@ function StudentProject() {
                             type="text"
                             id="reportLink"
                             name="reportLink"
+                            placeholder={userData.report_link}
                             required
                             className="w-full px-3 py-2 border rounded-md"
                           />
@@ -272,6 +276,7 @@ function StudentProject() {
                             type="text"
                             id="frontendTechnologies"
                             name="frontendTechnologies"
+                            placeholder={userData.frontendTechnologies}
                             required
                             className="w-full px-3 py-2 border rounded-md"
                           />
@@ -289,6 +294,7 @@ function StudentProject() {
                             type="text"
                             id="backendTechnologies"
                             name="backendTechnologies"
+                            placeholder={userData.backendTechnologies}
                             required
                             className="w-full px-3 py-2 border rounded-md"
                           />
@@ -305,6 +311,7 @@ function StudentProject() {
                             type="text"
                             id="database"
                             name="database"
+                            placeholder={userData.database}
                             required
                             className="w-full px-3 py-2 border rounded-md"
                           />
@@ -322,6 +329,7 @@ function StudentProject() {
                             type="text"
                             id="presentationLink"
                             name="presentationLink"
+                            placeholder={userData.presentation_link}
                             required
                             className="w-full px-3 py-2 border rounded-md"
                           />
@@ -338,41 +346,50 @@ function StudentProject() {
                             type="text"
                             id="groupName"
                             name="groupName"
+                            placeholder={userData.groupName}
                             required
                             className="w-full px-3 py-2 border rounded-md"
                           />
                         </div>
                       </div>
-                      <div className="mb-4 flex">
-                        <div className="mr-4 flex-1">
-                          <label
-                            htmlFor="company"
-                            className="block mb-2 font-bold"
-                          >
-                            Company:
-                          </label>
-                          <input
-                            type="text"
-                            id="company"
-                            required
-                            className="w-full px-3 py-2 border rounded-md"
-                          />
+                      {userData.project_type ===
+                      "UDP (User Defined Project)" ? (
+                        <></>
+                      ) : (
+                        <div className="mb-4 flex">
+                          <div className="mr-4 flex-1">
+                            <label
+                              htmlFor="company"
+                              className="block mb-2 font-bold"
+                            >
+                              Company:
+                            </label>
+                            <input
+                              type="text"
+                              id="company"
+                              placeholder={userData.company}
+                              required
+                              className="w-full px-3 py-2 border rounded-md"
+                            />
+                          </div>
+                          <div className="mr-4 flex-1">
+                            <label
+                              htmlFor="companyEmail"
+                              className="block mb-2 font-bold"
+                            >
+                              Company Email:
+                            </label>
+                            <input
+                              type="text"
+                              id="companyEmail"
+                              placeholder={userData.companyEmail}
+                              required
+                              className="w-full px-3 py-2 border rounded-md"
+                            />
+                          </div>
                         </div>
-                        <div className="mr-4 flex-1">
-                          <label
-                            htmlFor="companyEmail"
-                            className="block mb-2 font-bold"
-                          >
-                            Company Email:
-                          </label>
-                          <input
-                            type="text"
-                            id="companyEmail"
-                            required
-                            className="w-full px-3 py-2 border rounded-md"
-                          />
-                        </div>
-                      </div>
+                      )}
+
                       <div className="mb-4">
                         <Button type="submit">Submit</Button>
                       </div>

@@ -4,6 +4,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useRouter } from "next/router";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function StudentProfile() {
   const [userData, setUserData] = useState({});
@@ -119,11 +120,13 @@ function StudentProfile() {
     p: 4,
   }
   return (
-    <div className="max-w-md mx-auto mt-4">
+    <>
       {loading ? (
-        <p>Loading...</p>
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
       ) : (
-        <>
+        <div className="max-w-md mx-auto mt-4">
           <h1 className="text-3xl text-center pb-4 font-bold mb-4">
             User Profile
           </h1>
@@ -338,9 +341,9 @@ function StudentProfile() {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 

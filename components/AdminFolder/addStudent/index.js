@@ -1,5 +1,8 @@
 import { Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
+
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -10,6 +13,7 @@ function AddStudentForm() {
   const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
   const [enrollmentNumber, setEnrollmentNumber] = useState("");
+  const [loading, setLoading] = useState(false);
   let bearerToken;
   if (typeof window !== "undefined") {
     // Perform localStorage action
@@ -69,6 +73,7 @@ function AddStudentForm() {
   };
 
   return (
+
     <div>
       <ToastContainer
         position="top-right"

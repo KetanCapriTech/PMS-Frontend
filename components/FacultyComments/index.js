@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
-
 import { styled } from "@mui/material/styles";
 
 function index() {
-  const [comments, setComments] = useState([]); // replace [...] with your initial comments array
+  const [comments, setComments] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const [projectId, setProjectId] = useState("");
   const [commentText, setCommentText] = useState("");
@@ -20,6 +19,31 @@ function index() {
     ? comments.filter((comment) => comment.text !== "")
     : [];
 
+  const fetchDetails = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/faculty/groups`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      const groupsArray = Object.keys(data).map((key) => data[key]);
+      //   setGroups(groupsArray);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchDetails();
+  }, []);
+
   const handleShowMore = () => {
     setShowAll(true);
   };
@@ -27,96 +51,11 @@ function index() {
     setCommentBox(false);
   };
 
-  const getProjectid = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/student/projectid`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      setProjectId(data);
-      if (data) {
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    getProjectid(projectId);
-  }, []);
+  const handleSubmit = async () => {};
 
-  const handleSubmit = async () => {
-    try {
-      setCommentBox(true);
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/${projectId}/comments`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      setComments(data);
-      if (data) {
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const handleCommentDelete = async (commentId) => {
-    try {
-      setCommentBox(true);
-      console.log(commentId);
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/comment/${projectId}/${commentId}/`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const handleCommentDelete = async (commentId) => {};
 
-  const handleComment = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/projects/comment/${projectId}`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            text: commentText,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      console.log("Success");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const handleComment = async () => {};
   const Div = styled("div")(({ theme }) => ({
     ...theme.typography.button,
     backgroundColor: theme.palette.background.paper,

@@ -244,6 +244,27 @@ function Profile() {
                     )}
                   </div>
                   <div className="mb-4">
+                    <label className="text-gray-600 font-bold p-2">
+                      Set Max Projects :
+                    </label>
+                    {userData && (
+                      <select
+                        className="border border-gray-400 rounded px-3 py-2 p-2"
+                        value={userData.maxProjects}
+                        style={{ width: "5%" }}
+                        onChange={(e) => {
+                          // handle change event
+                        }}
+                      >
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        {/* add more options as needed */}
+                      </select>
+                    )}
+                  </div>
+
+                  <div className="mb-4">
                     <label className="text-gray-600 font-bold">
                       Phone Number:
                     </label>

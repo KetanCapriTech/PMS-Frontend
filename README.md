@@ -1,11 +1,11 @@
 # PROJECT MANAJEMENT SYSTEM NextJS
 
 ### Get Started
-npm install
 
+yarn install
+(note :- yarn -v 1.22.19 node -v v16.16.0)
 
 npm run dev
-
 
 ## Files and Folder
 

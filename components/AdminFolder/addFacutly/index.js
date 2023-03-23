@@ -1,5 +1,9 @@
 import { Avatar, Box, Button, Container, CssBaseline, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
+
+
 import { toast, ToastContainer } from "react-toastify";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,6 +12,7 @@ function AddFacultyForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [department, setDepartment] = useState("");
+  const [loading, setLoading] = useState(false);
   let bearerToken;
   if (typeof window !== "undefined") {
     // Perform localStorage action

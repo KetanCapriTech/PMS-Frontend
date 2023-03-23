@@ -2,6 +2,9 @@ import { Box, Button, Modal } from "@mui/material";
  
 import { DataGrid, GridToolbarContainer, GridToolbarExport } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
+
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 const style = {
@@ -70,17 +73,24 @@ const FacultyTab = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [department, setDepartment] = useState("");
-  const bearerToken = localStorage.getItem("token");
+  const [loading, setLoading] = useState(false);
 
+  let token;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    token = localStorage.getItem("token");
+  }
+  //handle get faculty
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/admin/`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${bearerToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -88,6 +98,7 @@ const FacultyTab = () => {
       console.log(data);
       if (data && data.faculties) {
         setMyArray(data.faculties);
+        setLoading(false);
       }
       console.log(myArray);
     } catch (error) {
@@ -112,7 +123,7 @@ const FacultyTab = () => {
           }),
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${bearerToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -158,7 +169,7 @@ const FacultyTab = () => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${bearerToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -202,6 +213,7 @@ const FacultyTab = () => {
   };
 
   return (
+
     <div>
       <ToastContainer
         position="top-right"
@@ -333,6 +345,7 @@ const FacultyTab = () => {
       <br />
     </div>
     </div>
+
   );
 };
 

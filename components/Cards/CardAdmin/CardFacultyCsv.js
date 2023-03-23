@@ -1,4 +1,4 @@
-import FacultyCsv from "components/AdminFolder/facultyCsv";
+import FacultyCsv from "components/AdminFolder/f-acultyCsv";
 import React from "react";
 
 // components

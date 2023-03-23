@@ -1,9 +1,80 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Box, Button, Modal } from "@mui/material";
+import { DataGrid, GridToolbarContainer, GridToolbarExport } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+function customToolBar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarExport />
+    </GridToolbarContainer>
+  )
+}
 const StudentTab = () => {
+
+  //table heading
+  const columns = [
+    {
+      field: 'name',
+      headerName: 'name',
+      minWidth: 150
+
+    }, {
+      field: 'email',
+      headerName: 'email',
+      minWidth: 250
+    }, {
+      field: 'department',
+      headerName: 'department',
+      minWidth: 200,
+      sortable: false
+    },
+    {
+      field: 'enrollment_number',
+      headerName: 'enrollment_number',
+      minWidth: 150
+    },
+    {
+      field: 'actions', headerName: 'Actions', width: 200, sortable: false, renderCell: (params) => {
+        return (
+          <>
+            <Button
+              onClick={() => handleEdit(params.row)}
+              variant="contained"
+              style={{ height: 35, width: 100, margin: 5 }}
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={() => handleDelete(params.row)}
+              variant="contained"
+              color="error"
+              style={{ height: 35, width: 100, margin: 5 }}
+            >
+              Delete
+            </Button>
+          </>
+
+        );
+      }
+    }
+
+  ]
   const [selectedStudentId, setSelectedStudentId] = useState(null);
   const [myArray, setMyArray] = useState([]);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -12,6 +83,7 @@ const StudentTab = () => {
   const [department, setDepartment] = useState("");
   const [enrollmentNumber, setEnrollmentNumber] = useState("");
   const [loading, setLoading] = useState(false);
+
 
   let bearerToken;
   if (typeof window !== "undefined") {
@@ -73,14 +145,36 @@ const StudentTab = () => {
           },
         }
       );
-
+      console.log(response);
       const data = await response.json();
       console.log(data);
       setIsEditOpen(false);
-      alert(data.message);
+      // alert(data.message);
       if (data && data.students) {
         setMyArray(data.students);
       }
+      if (response.status == 200) {
+        toast.success("Student Updated", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.error("Error in Update", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      handleSubmit();
     } catch (error) {
       console.error(error);
     }
@@ -90,6 +184,8 @@ const StudentTab = () => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/admin/delete-student/${id}`,
+
+        
         {
           method: "DELETE",
           headers: {
@@ -103,6 +199,28 @@ const StudentTab = () => {
       if (data && data.students) {
         setMyArray(data.students);
       }
+      if (response.status == 200) {
+        toast.success("Student Deleted", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.error("Error in Delete", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      handleSubmit();
     } catch (error) {
       console.error(error);
     }
@@ -117,6 +235,7 @@ const StudentTab = () => {
   };
 
   return (
+
     <>
       {loading ? (
         <Box sx={{ width: "100%" }}>
@@ -235,6 +354,8 @@ const StudentTab = () => {
         </div>
       )}
     </>
+
+  
   );
 };
 

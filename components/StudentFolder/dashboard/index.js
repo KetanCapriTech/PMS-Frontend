@@ -13,6 +13,7 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import LinearProgress from "@mui/material/LinearProgress";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 function ProjectDetails() {
   const [userData, setUserData] = useState([]);
   const [inviteCode, setInviteCode] = useState("");
@@ -57,6 +58,10 @@ function ProjectDetails() {
     } catch (error) {
       console.error("Failed to read clipboard contents: ", error);
     }
+  };
+
+  const handleClearText = () => {
+    setPasteText("");
   };
 
   const styles = {
@@ -627,7 +632,11 @@ function ProjectDetails() {
           <div>
             <div className="text-right p-2">
               <ContentPasteIcon onClick={handlePaste}></ContentPasteIcon>
+              <DeleteOutlineOutlinedIcon
+                onClick={handleClearText}
+              ></DeleteOutlineOutlinedIcon>
             </div>
+
             <div className="p-4 font-bold">Enter Invite Code</div>
 
             <TextField

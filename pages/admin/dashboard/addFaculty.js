@@ -5,9 +5,10 @@ import CardAddFaculty from "components/Cards/CardAdmin/CardAddFaculty";
 export default function FacultyTab() {
   return (
     <>
-      <div className="flex flex-wrap"></div>
-      <div className="flex flex-wrap w-full lg:w-8/12 px-4 mt-4">
-        <CardAddFaculty />
+      <div className="flex flex-wrap pl-8 justify-center">
+        <div className="w-full lg:w-8/12 px-4  py-4 ">
+          <CardAddFaculty />
+        </div>
       </div>
     </>
   );

@@ -80,7 +80,7 @@ function AddStudentForm() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: "#e3f2fd" }} className="justify-center">
       <ToastContainer
         position="top-right"
         autoClose={5000}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
+import { Button, Card } from "@mui/material";
 
 function Group() {
   const [userData, setUserData] = useState([]);
@@ -77,24 +78,34 @@ function Group() {
           {memberArray.map((member, index) => {
             const memberId = Object.keys(member)[0];
             const memberData = member[memberId];
-
             return (
-              <div key={memberId} className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-lg font-bold mb-4 p-2">
-                  {memberData.name}
-                </h2>
-                <p className="mb-2 p-2">Email: {memberData.email}</p>
-                <p className="mb-2 p-2">
-                  Enrollment Number: {memberData.enrollment_number}
-                </p>
-                {user_Id === leaderEmail && index !== 0 ? (
-                  <button
-                    className="text-red-500 p-2"
-                    onClick={() => handleDelete(memberData._id)}
-                  >
-                    Delete
-                  </button>
-                ) : null}
+              <div key={memberId} className=" rounded-lg shadow-md  p-6 mr-4">
+                <Card style={{ backgroundColor: "#e3f2fd" }}>
+                  <h2 className="text-lg font-bold text-black  underline mb-4 p-2">
+                    {memberData.name}
+                  </h2>
+                  <p className="mb-2 p-2 text-lg">Email : {memberData.email}</p>
+                  <p className="mb-2 p-2 ">
+                    Enrollment Number : {memberData.enrollment_number}
+                  </p>
+
+                  {user_Id === leaderEmail && index === 0 && (
+                    <p className="mb-3 p-5 font-bold"></p>
+                  )}
+
+                  <div className="text-right">
+                    {user_Id === leaderEmail && index !== 0 ? (
+                      <Button
+                        className="mb-4 ml-4 mr-4"
+                        onClick={() => handleDelete(memberData._id)}
+                        variant="contained"
+                        color="error"
+                      >
+                        Delete Member
+                      </Button>
+                    ) : null}
+                  </div>
+                </Card>
               </div>
             );
           })}

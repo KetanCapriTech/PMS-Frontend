@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Comments from "../../Comments";
 import Box from "@mui/material/Box";
@@ -13,7 +13,6 @@ function StudentProject() {
   const [userData, setUserData] = useState([]);
   const [leaderEmail, setLeaderEmail] = useState("");
   const [projectId, setProjectId] = useState("");
-  const [loading, setLoading] = useState(false);
 
   let token;
   let user_Id;
@@ -110,63 +109,72 @@ function StudentProject() {
         </Box>
       ) : (
         <div className="w-full max-w-xs p-4">
-          <div className="bg-white rounded-lg shadow-xl  p-4 flex-grow ">
-            <h1 className="font-bold text-xl mb-2 pb-2">Project Details</h1>
-            {userData.length === 0 ? (
-              <div>Project not created yet</div>
-            ) : (
-              <div>
-                <div className="mb-2">
-                  <strong>Title : </strong>
-                  {userData.title}
-                </div>
-                <div className="mb-2">
-                  <strong>Description : </strong>
-                  {userData.description}
-                </div>
-                <div className="mb-2">
-                  <div className="flex">
-                    <strong>Project Log : </strong>
+          <Card style={{ backgroundColor: "#e3f2fd" }}>
+            <div className=" rounded-lg shadow-xl  p-4 flex-grow ">
+              <h1 className="font-bold text-xl mb-2 pb-2">Project Details</h1>
+              {userData.length === 0 ? (
+                <div>Project not created yet</div>
+              ) : (
+                <div>
+                  <div className="mb-2">
+                    <strong>Title : </strong>
+                    {userData.title}
+                  </div>
+                  <div className="mb-2">
+                    <strong>Description : </strong>
+                    {userData.description}
+                  </div>
+                  <div className="mb-2">
+                    <div className="flex">
+                      <strong>Project Log : </strong>
 
-                    <div className="mb-2">{userData.project_isApproved}</div>
+                      <div className="mb-2">{userData.project_isApproved}</div>
 
-                    <div>No Data</div>
+                      <div>No Data</div>
+                    </div>
+                  </div>
+                  <div className="mb-2">
+                    <strong>Project Status : </strong>
+                    {userData.status}
+                  </div>
+                  <div className="mb-2">
+                    <strong>Semester : </strong>
+                    {userData.semester}
+                  </div>
+                  <div className="mb-2">
+                    <strong>Total Capacity : </strong>
+                    {userData.capacity}
+                  </div>
+                  <div className="mb-2">
+                    <strong>Company : </strong>
+                    {userData.company}
+                  </div>
+                  <div className="mb-2">
+                    <strong>Project Type : </strong>
+                    {userData.project_type}
+                  </div>
+
+                  {user_Id === leaderEmail && (
+                    <div className="mb-2 " style={{ color: "#2979ff" }}>
+                      <strong>Invite Code : </strong>
+                      {userData.invite_code}
+                    </div>
+                  )}
+                  <div className="text-right">
+                    {user_Id === leaderEmail && (
+                      <Button
+                        variant="outlined"
+                        style={{ backgroundColor: "#e3f2fd" }}
+                        onClick={handleClickOpen}
+                      >
+                        Update Project
+                      </Button>
+                    )}
                   </div>
                 </div>
-                <div className="mb-2">
-                  <strong>Project Status : </strong>
-                  {userData.status}
-                </div>
-                <div className="mb-2">
-                  <strong>Semester : </strong>
-                  {userData.semester}
-                </div>
-                <div className="mb-2">
-                  <strong>Total Capacity : </strong>
-                  {userData.capacity}
-                </div>
-                <div className="mb-2">
-                  <strong>Company : </strong>
-                  {userData.company}
-                </div>
-                <div className="mb-2">
-                  <strong>Project Type : </strong>
-                  {userData.project_type}
-                </div>
-                {user_Id === leaderEmail && (
-                  <div className="mb-2 text-red-500">
-                    <strong>Invite Code : </strong>
-                    {userData.invite_code}
-                  </div>
-                )}
-                {user_Id === leaderEmail && (
-                  <Button variant="outlined" onClick={handleClickOpen}>
-                    Update Project
-                  </Button>
-                )}
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          </Card>
           <br></br>
 
           <Dialog open={open} onClose={handleClose}>

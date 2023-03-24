@@ -106,11 +106,14 @@ function index() {
   return (
     <>
       {/* GET Submission view */}
-      <div className="bg-white rounded-lg shadow-md p-4">
+      <div
+        className=" rounded-lg shadow-md p-4"
+        style={{ backgroundColor: "#e3f2fd" }}
+      >
         <h1 className="text-2xl font-bold mb-4">Submission Links:</h1>
 
-        <div className="flex flex-wrap">
-          <div className="bg-gray-100 rounded-lg shadow-md p-4 mr-4 mb-4">
+        <div className="flex flex-wrap justify-center">
+          <div className="bg-white rounded-lg shadow-md p-4 mr-4 mb-4">
             <h1 className="text-xl font-bold mb-4">Repository Link:</h1>
             <ul>
               <li>
@@ -126,7 +129,7 @@ function index() {
             </ul>
           </div>
 
-          <div className="bg-gray-100 rounded-lg shadow-md p-4 mr-4 mb-4">
+          <div className="bg-white rounded-lg shadow-md p-4 mr-4 mb-4">
             <h1 className="text-xl font-bold mb-4">Report Link:</h1>
             <ul>
               <li>
@@ -140,7 +143,7 @@ function index() {
             </ul>
           </div>
 
-          <div className="bg-gray-100 rounded-lg shadow-md p-4 mr-4 mb-4">
+          <div className="bg-white rounded-lg shadow-md p-4 mr-4 mb-4">
             <h1 className="text-xl font-bold mb-4">Presentation Link:</h1>
             <ul>
               <li>
@@ -156,6 +159,7 @@ function index() {
             </ul>
           </div>
         </div>
+
         <div>
           {submission.presentation_link === "" ? (
             <>

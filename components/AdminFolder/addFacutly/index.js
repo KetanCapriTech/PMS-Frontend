@@ -133,7 +133,7 @@ function AddFacultyForm() {
     //     Add Student
     //   </button>
     // </div>
-    <div>
+    <div style={{ backgroundColor: "#e3f2fd" }}>
       <ToastContainer
         position="top-right"
         autoClose={5000}

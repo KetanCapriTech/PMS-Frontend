@@ -118,7 +118,7 @@ function StudentProfile() {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
-  }
+  };
   return (
     <>
       {loading ? (
@@ -146,7 +146,10 @@ function StudentProfile() {
                 <div className="w-full px-4 text-center mt-20"></div>
               </div>
               <div className="text-center mt-12">
-                <div className="bg-gray-400 rounded-lg shadow-md p-4">
+                <div
+                  className=" rounded-lg shadow-md p-4"
+                  style={{ backgroundColor: "#e3f2fd" }}
+                >
                   <div className="mb-4">
                     <label className="text-gray-600 font-bold">Name : </label>
 
@@ -191,6 +194,7 @@ function StudentProfile() {
                 </div>
 
                 <Button onClick={handleOpen}>Update Password</Button>
+                <br></br>
                 <Modal
                   open={open}
                   onClose={handleClose}

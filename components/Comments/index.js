@@ -137,9 +137,19 @@ function index() {
             ) : (
               <div
                 className="bg-white rounded-lg shadow-xl p-4"
-                style={{ height: "300px", overflow: "auto" }}
+                style={{
+                  height: "300px",
+                  overflow: "auto",
+                  backgroundColor: "#e3f2fd",
+                }}
               >
-                <Div>{"All Comments : "}</Div>
+                <Div
+                  style={{
+                    backgroundColor: "#e3f2fd",
+                  }}
+                >
+                  {"All Comments : "}
+                </Div>
                 {filteredComments
                   .slice(0, showAll ? filteredComments.length : maxComments)
                   .map((comment) => (
@@ -198,7 +208,12 @@ function index() {
       </div>
 
       <br></br>
-      <div className="bg-white rounded-lg shadow-xl ">
+
+      {/**Write a Comment  */}
+      <div
+        className="bg-white rounded-lg shadow-xl "
+        style={{ backgroundColor: "#e3f2fd" }}
+      >
         <label
           htmlFor="message"
           className="block font-medium text-gray-700 mb-2 p-4"

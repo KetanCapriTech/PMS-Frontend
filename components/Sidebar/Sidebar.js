@@ -60,12 +60,12 @@ export default function Sidebar() {
           </button>
           {/* Brand */}
           <Link href="/">
-            <a
+            <p
               href="#pablo"
               className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-2xl uppercase font-bold p-4 px-0"
             >
               PMS
-            </a>
+            </p>
           </Link>
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">

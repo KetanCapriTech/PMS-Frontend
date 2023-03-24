@@ -182,12 +182,13 @@ export default function Groups() {
           <LinearProgress />
         </Box>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
           {groups.map((group) => (
             <div
               key={group._id}
-              className="bg-white rounded-lg shadow-lg cursor-pointer p-4 hover:shadow-xl transition-all duration-300"
+              className=" rounded-lg shadow-lg cursor-pointer p-4 hover:shadow-xl transition-all duration-300"
               onClick={() => handleClick(group)}
+              style={{ marginBottom: "1rem", backgroundColor: "#e3f2fd" }}
             >
               <h2 className="text-lg font-bold mb-2">
                 Gorup Name : {group.groupName}
@@ -216,52 +217,59 @@ export default function Groups() {
               <Box sx={style}>
                 {selectedGroup && (
                   <>
-                    <p className="text-black font-bold text-lg mb-1">
-                      {selectedGroup.groupName}
-                    </p>
-                    <p className="text-gray-500 text-md mb-1">
-                      Title : {selectedGroup.title}
-                    </p>
-                    <p className="text-gray-500 text-md mb-4">
-                      Description : {selectedGroup.description}
-                    </p>
-                    <p className="text-gray-500 text-md mb-4">
-                      Backend Technologies : {selectedGroup.backendTechnologies}
-                    </p>
-                    <p className="text-gray-500 text-md mb-4">
-                      Frontend Technologies :{" "}
-                      {selectedGroup.frontendTechnologies}
-                    </p>
-                    <p className="text-gray-500 text-md mb-4">
-                      Database : {selectedGroup.database}
-                    </p>
-                    <p className="text-gray-500 text-md mb-4">
-                      Leader : {selectedGroup.leader.name}
-                    </p>
-                    <p className="text-gray-500 text-md mb-4">
-                      Project type : {selectedGroup.project_type}
-                    </p>
-                    <p className="text-gray-500 text-md mb-4">
-                      Semester : {selectedGroup.semester}
-                    </p>
-                    {selectedGroup.project_type ===
-                    "UDP (User Defined Project)" ? (
-                      <></>
-                    ) : (
-                      <>
-                        <p className="text-gray-500 text-md mb-4">
-                          Company : {selectedGroup.company}
-                        </p>
-                        <p className="text-gray-500 text-md mb-4">
-                          Company Email : {selectedGroup.company_email}
-                        </p>
-                      </>
-                    )}
+                    <div
+                      style={{ backgroundColor: "#e3f2fd" }}
+                      className="p-4 rounded-lg shadow-lg"
+                    >
+                      <p className="text-black font-bold text-lg mb-1">
+                        {selectedGroup.groupName}
+                      </p>
+                      <p className="text-gray-500 text-md mb-1">
+                        Title : {selectedGroup.title}
+                      </p>
+                      <p className="text-gray-500 text-md mb-4">
+                        Description : {selectedGroup.description}
+                      </p>
+                      <p className="text-gray-500 text-md mb-4">
+                        Backend Technologies :{" "}
+                        {selectedGroup.backendTechnologies}
+                      </p>
+                      <p className="text-gray-500 text-md mb-4">
+                        Frontend Technologies :{" "}
+                        {selectedGroup.frontendTechnologies}
+                      </p>
+                      <p className="text-gray-500 text-md mb-4">
+                        Database : {selectedGroup.database}
+                      </p>
+                      <p className="text-gray-500 text-md mb-4">
+                        Leader : {selectedGroup.leader.name}
+                      </p>
+                      <p className="text-gray-500 text-md mb-4">
+                        Project type : {selectedGroup.project_type}
+                      </p>
+                      <p className="text-gray-500 text-md mb-4">
+                        Semester : {selectedGroup.semester}
+                      </p>
+                      {selectedGroup.project_type ===
+                      "UDP (User Defined Project)" ? (
+                        <></>
+                      ) : (
+                        <>
+                          <p className="text-gray-500 text-md mb-4">
+                            Company : {selectedGroup.company}
+                          </p>
+                          <p className="text-gray-500 text-md mb-4">
+                            Company Email : {selectedGroup.company_email}
+                          </p>
+                        </>
+                      )}
 
-                    <p className="text-gray-500 text-md mb-4">
-                      Project Status :
-                      <p className="text-red-500">{selectedGroup.status}</p>
-                    </p>
+                      <p className="text-gray-500 text-md mb-4">
+                        Project Status :
+                        <p className="text-red-500">{selectedGroup.status}</p>
+                      </p>
+                    </div>
+                    <br></br>
 
                     <div>
                       <div>
@@ -273,9 +281,16 @@ export default function Groups() {
                             ) : (
                               <div
                                 className="bg-white rounded-lg shadow-xl p-4"
-                                style={{ height: "300px", overflow: "auto" }}
+                                style={{
+                                  height: "300px",
+                                  overflow: "auto",
+                                  backgroundColor: "#e3f2fd",
+                                }}
                               >
-                                <Div>{"All Comments : "}</Div>
+                                <br></br>
+                                <Div style={{ backgroundColor: "#e3f2fd" }}>
+                                  {"All Comments : "}
+                                </Div>
                                 {filteredComments
                                   .slice(
                                     0,
@@ -299,59 +314,68 @@ export default function Groups() {
                                         </p>
                                         {comment.email ===
                                           localStorage.getItem("email") && (
-                                          <button
+                                          <Button
+                                            variant="contained"
+                                            color="success"
                                             onClick={() =>
                                               handleCommentDelete(comment._id)
                                             }
                                           >
                                             Delete
-                                          </button>
+                                          </Button>
                                         )}
                                       </div>
                                     </div>
                                   ))}
                               </div>
                             )}
-                            {!showAll &&
-                              filteredComments.length > maxComments && (
-                                <>
-                                  <Button
-                                    className="ml-2 mt-2"
-                                    variant="contained"
-                                    color="success"
-                                    onClick={handleShowMore}
-                                  >
-                                    Show More
-                                  </Button>
-                                </>
-                              )}
+                            <br></br>
+                            <div className="text-right">
+                              {!showAll &&
+                                filteredComments.length > maxComments && (
+                                  <>
+                                    <Button
+                                      className="ml-2 mt-2"
+                                      variant="contained"
+                                      color="success"
+                                      onClick={handleShowMore}
+                                    >
+                                      Show More
+                                    </Button>
+                                  </>
+                                )}
 
-                            <Button
-                              className="ml-2 mt-2"
-                              variant="contained"
-                              color="error"
-                              onClick={handleCloseCommentBox}
-                            >
-                              Close
-                            </Button>
+                              <Button
+                                className="ml-2 mt-2"
+                                variant="contained"
+                                color="error"
+                                onClick={handleCloseCommentBox}
+                              >
+                                Close
+                              </Button>
+                            </div>
                           </div>
                         ) : (
                           <>
-                            <div className="p-4">
+                            <div className="p-4 text-right">
                               <Button
                                 onClick={getAllComments}
                                 variant="outlined"
                               >
                                 Show Comments
                               </Button>
+                              <br></br>
                             </div>
                           </>
                         )}
                       </div>
                     </div>
-
+                    <br></br>
                     {/* {selectedGroup.leader.name === studentTable.email && ( */}
-                    <table className="table-auto w-full">
+                    <table
+                      className="table-auto w-full rounded-lg shadow-xl "
+                      style={{ backgroundColor: "#e3f2fd" }}
+                    >
                       <thead>
                         <tr>
                           <th className="px-4 py-2">Name</th>
@@ -376,7 +400,12 @@ export default function Groups() {
                       </tbody>
                     </table>
                     {/* )} */}
-                    <div className="bg-white rounded-lg shadow-xl ">
+                    <br></br>
+                    <br></br>
+                    <div
+                      className=" rounded-lg shadow-xl "
+                      style={{ backgroundColor: "#e3f2fd" }}
+                    >
                       <label
                         htmlFor="message"
                         className="block font-medium text-gray-700 mb-2 p-4"
@@ -396,7 +425,7 @@ export default function Groups() {
                       </div>
 
                       <div className="p-4">
-                        <>
+                        <div className="text-right">
                           <Button
                             variant="contained"
                             color="success"
@@ -404,9 +433,10 @@ export default function Groups() {
                           >
                             Send
                           </Button>
-                        </>
+                        </div>
                       </div>
                     </div>
+                    <br></br>
                   </>
                 )}
               </Box>
